@@ -3,13 +3,64 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class Campeonato {
     private Jogador[] jogadores;
     private int qtdJogadores;
-     private File arq = new File("jogoGeneral.dat");
+    private int maxJogadores;
+    private File arq = new File("jogoGeneral.dat");
+    private Scanner teclado = new Scanner(System.in);
+
+     public Campeonato() {
+        jogadores = new Jogador[10];
+        qtdJogadores = 0;
+        maxJogadores = 10;
+        JogoDados jogo = new JogoDados();
+
+    }
 
     public void incluirJogador() {
+        char p;
+
+        System.out.println("Insira seu nome: ");
+        String nome = teclado.nextLine();
+
+        do {
+            System.out.println("Tipo de jogador (H - humano ou M - maquina):");
+            p = teclado.nextLine().toUpperCase().charAt(0);
+        } while (p != 'H' && p != 'M');
+
+        if (qtdJogadores < maxJogadores) {
+
+            
+            if(p == 'H'){
+
+                System.out.println("Insira seu CPF: ");
+                String cpf = teclado.nextLine();
+                teclado.nextLine();
+                System.out.println("Insira sua agencia: ");
+                String agencia = teclado.nextLine();
+                teclado.nextLine();
+                System.out.println("Insira sua conta: ");
+                String conta = teclado.nextLine();
+                teclado.nextLine();
+                System.out.println("Insira o numero do banco: ");
+                int numeroBanco = teclado.nextInt();
+
+
+
+
+                jogadores[qtdJogadores] = new Humano(nome,jogo ,n,cpf, agencia, conta, numeroBanco);
+                qtdJogadores++;
+            }
+            else{
+                jogadores[qtdJogadores] = new Maquina(nome, p);
+                qtdJogadores++;
+            }
+        } else {
+            System.out.println("Não é possivel inserir mais jogadores !!!");
+        }
     }
 
     public void removerJogador() {

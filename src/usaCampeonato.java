@@ -23,31 +23,39 @@ public class usaCampeonato {
                 case 'a':
                     c.incluirJogador();
                     break;
+                    
                 case 'b':
                     c.removerJogador();
                     break;
+
                 case 'c':
                     c.iniciarCampeonato();
                     break;
+
                 case 'd':
                     c.mostrarCartela();
 
                     break;
+
                 case 'e':
                     
                     break;
+
                 case 'f':
 
                     break;
                 case 'g':
                     c.gravarEmArquivo();
                     break;
+
                 case 'h':
                     c.lerDoArquivo();
                     break;
+
                 case 'i':
                     System.out.println("Saindo...");
                 break;
+
                 default:
                     System.out.println("Opcao invalida. Tente novamente");
             }

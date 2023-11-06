@@ -1,24 +1,21 @@
 import java.io.Serializable;
-public class JogoGeneral implements Serializable{
+public class JogoGeneral extends JogoDados implements Serializable{
 
-    private Dado[] dados = new Dado[5];
     private int[] jogadas = new int[13];
+    private float valorAposta;
 
+    public JogoGeneral(float valorAposta) {
 
-    //Construtor inicializa o objeto dados e as jogadas
-    public JogoGeneral() {
-        for (int i = 0; i < 13; i++) {
-            jogadas[i] = -1;
-        }
-        for (int i = 0; i < 5; i++) {
-            dados[i] = new Dado();
-        }
+        super(5, "General", 100);
+        this.valorAposta = valorAposta;
+
     }
+
 
     //Dados são sorteados aleatoriamente a cada rodada
     public void rolarDados() { 
         for (int i = 0; i < 5; i++) {
-            dados[i].roll();
+            super.rolarDados();
         }
         System.out.println("Valores obtidos: "+this.toString());
     }
@@ -30,14 +27,17 @@ public class JogoGeneral implements Serializable{
 
     //lógica do calculo de pontos na jogada
     public int validarJogada(int x) {
-        int cont[] = new int[6];//vetor que contem quantos vezes cda numero caiu nos dados na rodada
+        int cont[] = new int[6];//vetor que contem quantos vezes cada numero caiu nos dados na rodada
         int soma = 0;//soma de todos os dados
 
-        for (int i = 0; i < 5; i++) {
-            soma += dados[i].getSideUp();
-            cont[dados[i].getSideUp() - 1]++;
-        }
         
+
+        for (int i = 0; i < 5; i++) {
+            cont[super.getDado(i).getSideUp() - 1]++;//conta quantas vezes cada numero caiu nos dados
+           
+        }
+
+         soma += super.somarFacesSorteadas(super.getDados());
         //boolean valida = false;
 
         switch (x) {// fazer a logica de return direto de cada pontuação de cada tipo de jogada
@@ -105,9 +105,10 @@ public class JogoGeneral implements Serializable{
     public String toString(){
         String s = "";
         for(int i = 0;i < 5;i++){
-            s += dados[i].toString() + "-";
+            s += super.getDado(i).getSideUp() + " ";
         }
         return s;
     }
+
 
 }

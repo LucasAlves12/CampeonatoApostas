@@ -26,9 +26,5 @@ public class JogoAzar extends JogoDados{
         }
     }
 
-    @Override
-    public int somarFacesSorteadas(Dado[] dados) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'somarFacesSorteadas'");
-    }
+    
 }
