@@ -25,4 +25,10 @@ public class JogoAzar extends JogoDados{
             super.setSaldo(super.getSaldo());
         }
     }
+
+    @Override
+    public int somarFacesSorteadas(Dado[] dados) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'somarFacesSorteadas'");
+    }
 }
