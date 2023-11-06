@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -6,6 +7,7 @@ import java.io.ObjectOutputStream;
 public class Campeonato {
     private Jogador[] jogadores;
     private int qtdJogadores;
+     private File arq = new File("jogoGeneral.dat");
 
     public void incluirJogador() {
     }
