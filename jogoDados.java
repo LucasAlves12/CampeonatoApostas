@@ -1,4 +1,4 @@
-public abstract class jogoDados {
+public abstract class JogoDados implements Estatistica {
     
     private int nDados;
     private String nomeJogo;
