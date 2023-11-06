@@ -1,3 +1,4 @@
+
 public abstract class JogoDados implements Estatistica {
     
     private int nDados;
