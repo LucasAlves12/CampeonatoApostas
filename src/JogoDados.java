@@ -5,7 +5,7 @@ public abstract class JogoDados implements Estatistica {
     private float saldo;
     private Dado[] dados;
 
-    jogoDados(int nDados, String nomeJogo, float saldo) {
+    JogoDados(int nDados, String nomeJogo, float saldo) {
         this.nDados = nDados;
         this.nomeJogo = nomeJogo;
         this.saldo = saldo;
