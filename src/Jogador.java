@@ -11,6 +11,10 @@ public abstract class Jogador {
         this.nJogos = 0;
     }
 
+    public int getnJogos() {
+        return nJogos;
+    }
+
     public void jogarDados() {
         for (int i = 0; i < nJogos; i++) {
             jogo[i].rolarDados();
@@ -23,8 +27,23 @@ public abstract class Jogador {
         }
     }
 
+    public JogoDados[] getJogo() {
+        return jogo;
+    }
+
+    public void addJogo(JogoDados jogo) {
+        this.jogo[nJogos] = jogo;
+        nJogos++;
+        
+
+    }
+
     public String getNome() {
        return this.nome;
+    }
+
+    public Float getSaldo() {
+        return jogo.getSaldo();
     }
 
 

@@ -91,6 +91,7 @@ public class Campeonato {
     public void iniciarCampeonato() {
         Float valorAposta;
         char opcao;
+        boolean s = false;
 
         if (qtdJogadores == 0) {
             System.out.println("Não há jogadores suficientes para iniciar o campeonato"); // se não houver jogadores suficientes
@@ -142,13 +143,18 @@ public class Campeonato {
                             jogadores[i].addJogo(new JogoAzar(valorAposta));
                             
                             do{
-                                  jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
-                                  boolean s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
-                            }
+                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
+                                s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
+
+                            }while(s == false);
                                 
                         }
                 
                     
+                }
+                else{
+                    
+                    valorAposta = jogadores[i].getSaldo();
                 }
             }
         }
