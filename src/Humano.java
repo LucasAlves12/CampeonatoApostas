@@ -4,8 +4,8 @@ public class Humano extends Jogador implements JogarComoHumano {
     private String conta;
     private int numeroBanco;
 
-    public Humano(String nome, JogoDados jogo, int n,String cpf, String agencia, String conta, int numeroBanco) {
-        super(nome,jogo,n);
+    public Humano(String nome,String cpf, String agencia, String conta, int numeroBanco) {
+        super(nome);
         this.cpf = cpf;
         this.agencia = agencia;
         this.conta = conta;

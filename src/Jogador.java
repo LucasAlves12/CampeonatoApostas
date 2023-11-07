@@ -5,9 +5,10 @@ public abstract class Jogador {
     private JogoDados[] jogo;
     private int nJogos;
 
-    public Jogador(String nome, JogoDados jogo, int n) {
+    public Jogador(String nome) {
         this.nome = nome;
-        this.jogo = new JogoDados[n];
+        this.jogo = new JogoDados[10];
+        this.nJogos = 0;
     }
 
     public void jogarDados() {
@@ -22,6 +23,9 @@ public abstract class Jogador {
         }
     }
 
+    public String getNome() {
+       return this.nome;
+    }
 
 
 

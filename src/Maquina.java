@@ -1,7 +1,7 @@
 public class Maquina extends Jogador implements JogarComoMaquina {
 
-    public Maquina(String nome, JogoDados jogo, int n) {
-        super(nome,jogo,n);
+    public Maquina(String nome) {
+        super(nome);
     }
 
     public int aplicarEstrategia(){

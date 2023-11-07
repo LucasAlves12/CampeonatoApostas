@@ -16,7 +16,7 @@ public class Campeonato {
         jogadores = new Jogador[10];
         qtdJogadores = 0;
         maxJogadores = 10;
-        JogoDados jogo = new JogoDados();
+        
 
     }
 
@@ -51,11 +51,11 @@ public class Campeonato {
 
 
 
-                jogadores[qtdJogadores] = new Humano(nome,jogo ,n,cpf, agencia, conta, numeroBanco);
+                jogadores[qtdJogadores] = new Humano(nome, cpf, agencia, conta, numeroBanco);
                 qtdJogadores++;
             }
             else{
-                jogadores[qtdJogadores] = new Maquina(nome, p);
+                jogadores[qtdJogadores] = new Maquina(nome);
                 qtdJogadores++;
             }
         } else {
@@ -64,6 +64,28 @@ public class Campeonato {
     }
 
     public void removerJogador() {
+        int posicaoRemovida = 0;
+        String nomeAux; // variavel para remover pelo nome
+        int aux;
+        int i;
+
+        System.out.println("Informe o nome da pessoa que deseja remover:");
+        nomeAux = teclado.nextLine();
+        teclado.nextLine();
+        for (i = 0; i < qtdJogadores; i++) {
+            if (jogadores[i].getNome().equals(nomeAux)) {
+                jogadores[i] = null;
+                posicaoRemovida = i;
+                aux = qtdJogadores;
+                for (i = posicaoRemovida; i < aux - 1; i++) {
+                    jogadores[i] = jogadores[i + 1];
+                }
+                qtdJogadores--;
+
+                System.out.println("Jogador removido!\n");
+            }
+        }
+
     }
 
     public void iniciarCampeonato() {
