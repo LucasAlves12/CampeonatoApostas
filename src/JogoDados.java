@@ -35,6 +35,14 @@ public abstract class JogoDados implements Estatistica {
         return dado.getSideUp();
     }
 
+    public int validarJogada(int x) {
+        return 0;
+    }
+
+    public boolean executarRegrasJogo() {
+        return false;
+    }
+
 
     public void setDados(Dado[] dados) {
         this.dados = dados;

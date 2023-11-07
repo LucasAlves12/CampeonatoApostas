@@ -89,9 +89,82 @@ public class Campeonato {
     }
 
     public void iniciarCampeonato() {
+        Float valorAposta;
+        char opcao;
+
+        if (qtdJogadores == 0) {
+            System.out.println("Não há jogadores suficientes para iniciar o campeonato"); // se não houver jogadores suficientes
+        }else{
+            
+            for(int i = 0; i < qtdJogadores; i++){
+
+                if(jogadores[i] instanceof Humano){
+                
+                    do{
+
+                    System.out.println("Qual o valor da aposta ?");
+                    valorAposta = teclado.nextFloat();
+
+                    }while(valorAposta < 0);
+
+                    do{
+
+                        System.out.println("Qual jogo sera jogado ? (G - General ou A - Dados)");
+                        opcao = teclado.nextLine().toUpperCase().charAt(0);
+                        teclado.nextLine();
+
+                    }while (opcao != 'G' && opcao != 'A') ;
+                        
+                    
+
+                        if(opcao == 'G'){
+                            jogadores[i].addJogo(new JogoGeneral(valorAposta));
+
+                            for(int j = 0; j < 13; j++){
+
+
+                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
+
+                                System.out.println("Qual a jogada ? (1 - 13)");
+                                int jogada = teclado.nextInt();
+                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].validarJogada(jogada);
+
+
+
+
+
+                            }
+
+
+                        }
+
+                        else if(opcao == 'A'){
+                            jogadores[i].addJogo(new JogoAzar(valorAposta));
+                            
+                            do{
+                                  jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
+                                  boolean s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
+                            }
+                                
+                        }
+                
+                    
+                }
+            }
+        }
     }
+    
+    
 
     public void mostrarCartela() {
+        int i;
+
+        System.out.println("----- Cartela de Resultados -----\n");
+        System.out.printf("%s", "\t");
+
+        for (i = 0; i < qtdJogadores; i++)
+            System.out.printf("%s", "\t" + jogadores[i].getNome() + "(" + jogadores[i].getTipoJogador() + ")\t");
+        System.out.println();
     }
 
      //grava em arquivo .dat a rodada executada
