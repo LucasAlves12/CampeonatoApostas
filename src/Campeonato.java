@@ -99,63 +99,103 @@ public class Campeonato {
             
             for(int i = 0; i < qtdJogadores; i++){
 
-                if(jogadores[i] instanceof Humano){
-                
-                    do{
+                if(jogadores[i].getSaldo(i) <= 0){
+                    System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                    break;
+                }
 
-                    System.out.println("Qual o valor da aposta ?");
-                    valorAposta = teclado.nextFloat();
+                else{
 
-                    }while(valorAposta < 0);
-
-                    do{
-
-                        System.out.println("Qual jogo sera jogado ? (G - General ou A - Dados)");
-                        opcao = teclado.nextLine().toUpperCase().charAt(0);
-                        teclado.nextLine();
-
-                    }while (opcao != 'G' && opcao != 'A') ;
-                        
+                    if(jogadores[i] instanceof Humano){
                     
+                        do{
 
-                        if(opcao == 'G'){
-                            jogadores[i].addJogo(new JogoGeneral(valorAposta));
+                        System.out.println("Qual o valor da aposta ?");
+                        valorAposta = teclado.nextFloat();
 
-                            for(int j = 0; j < 13; j++){
+                        }while(valorAposta < 0);
+
+                        do{
+
+                            System.out.println("Qual jogo sera jogado ? (G - General ou A - Dados)");
+                            opcao = teclado.nextLine().toUpperCase().charAt(0);
+                            teclado.nextLine();
+
+                        }while (opcao != 'G' && opcao != 'A') ;
+                            
+                        
+
+                            if(opcao == 'G'){
+                                jogadores[i].addJogo(new JogoGeneral(valorAposta));
+
+                                for(int j = 0; j < 13; j++){
 
 
-                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
+                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
 
-                                System.out.println("Qual a jogada ? (1 - 13)");
-                                int jogada = teclado.nextInt();
-                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].validarJogada(jogada);
+                                    System.out.println("Qual a jogada ? (1 - 13)");
+                                    int jogada = teclado.nextInt();
+                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].validarJogada(jogada);
 
 
 
+
+
+                                }
 
 
                             }
 
+                            else if(opcao == 'A'){
+                                jogadores[i].addJogo(new JogoAzar(valorAposta));
+                                
+                                do{
+                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
+                                    s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
 
+                                }while(s == false);
+                                    
+                            }
+                    
+                        
+                    }
+                    else if( jogadores[i] instanceof Maquina){
+
+                        if (jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 20) {
+                            valorAposta = (float)20;
                         }
+                        else if (jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 10) {
+                            valorAposta = (float)10;
+                        }
+                        else if(jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 5){
+                            valorAposta = (float)5;
+                        }
+                        else{
+                            valorAposta = (float)1;
+                        }
+                        
+                        int opcaoMaquina = (int)(Math.random() * 2);
 
-                        else if(opcao == 'A'){
+                        if(opcaoMaquina == 0){
+                            jogadores[i].addJogo(new JogoGeneral(valorAposta));
+
+                            for(int j = 0; j < 13; j++){
+
+                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
+                                //fazer a logica de jogada da maquina
+
+                            }
+                        }
+                        else{
                             jogadores[i].addJogo(new JogoAzar(valorAposta));
-                            
                             do{
                                 jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
                                 s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
 
                             }while(s == false);
-                                
                         }
-                
-                    
-                }
-                else{
-                    
-                    valorAposta = jogadores[i].getSaldo();
-                }
+                    }
+                }   
             }
         }
     }
