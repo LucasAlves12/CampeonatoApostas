@@ -38,11 +38,13 @@ public class usaCampeonato {
                     break;
 
                 case 'e':
-                    
+                    c.extrato();    
+
                     break;
 
                 case 'f':
-
+                    c.estatisticas();
+                    
                     break;
                 case 'g':
                     c.gravarEmArquivo();
