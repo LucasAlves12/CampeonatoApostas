@@ -42,8 +42,8 @@ public abstract class Jogador {
        return this.nome;
     }
 
-    public Float getSaldo() {
-        return jogo.getSaldo();
+    public Float getSaldo(int i) {
+        return jogo[i].getSaldo();
     }
 
 

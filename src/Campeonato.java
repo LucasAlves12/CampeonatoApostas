@@ -25,7 +25,7 @@ public class Campeonato {
 
         System.out.println("Insira seu nome: ");
         String nome = teclado.nextLine();
-
+        teclado.nextLine();
         do {
             System.out.println("Tipo de jogador (H - humano ou M - maquina):");
             p = teclado.nextLine().toUpperCase().charAt(0);
