@@ -101,7 +101,7 @@ public class Campeonato {
             
             for(int i = 0; i < qtdJogadores; i++){
 
-                jogadores[i].iniciarJogo();
+                //jogadores[i].iniciarJogo();
 
                 if(jogadores[i].getSaldo() <= 0){
                     System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
