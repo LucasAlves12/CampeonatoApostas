@@ -51,11 +51,7 @@ public abstract class Jogador {
        return this.nome;
     }
 
-<<<<<<< HEAD
     public Float getSaldo(int i) {
-=======
-    public float getSaldo(int i) {
->>>>>>> origin/pedro
         return jogo[i].getSaldo();
     }
 
