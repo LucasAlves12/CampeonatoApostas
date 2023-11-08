@@ -27,6 +27,15 @@ public abstract class Jogador {
         }
     }
 
+    public String getTipoJogador(){
+        String tipo;
+
+        if(this instanceof Humano)tipo = "H";
+        else  tipo = "M";
+       
+        return tipo;
+    }
+
     public JogoDados[] getJogo() {
         return jogo;
     }
