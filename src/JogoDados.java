@@ -55,6 +55,10 @@ public abstract class JogoDados implements Estatistica {
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
+
+    public int getPontuacao(int x){
+        return 0;
+    }
     
     @Override
     public int somarFacesSorteadas(Dado[] dados) {
@@ -64,4 +68,6 @@ public abstract class JogoDados implements Estatistica {
         }
         return soma;
     }
+
+    
 }

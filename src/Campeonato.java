@@ -92,6 +92,8 @@ public class Campeonato {
         Float valorAposta;
         char opcao;
         boolean s = false;
+        int jogada = 0;
+        int auxjogada;
 
         if (qtdJogadores == 0) {
             System.out.println("Não há jogadores suficientes para iniciar o campeonato"); // se não houver jogadores suficientes
@@ -99,7 +101,9 @@ public class Campeonato {
             
             for(int i = 0; i < qtdJogadores; i++){
 
-                if(jogadores[i].getSaldo(i) <= 0){
+                jogadores[i].iniciarJogo();
+
+                if(jogadores[i].getSaldo() <= 0){
                     System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
                     break;
                 }
@@ -133,10 +137,25 @@ public class Campeonato {
 
                                     jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
 
-                                    System.out.println("Qual a jogada ? (1 - 13)");
-                                    int jogada = teclado.nextInt();
-                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].validarJogada(jogada);
+                                    System.out.println("1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)");
 
+                                    for (int k = 0; k < 13; j++) {
+                                        auxjogada = jogadores[i].getPontuacaoRodada(i,k);
+                                        if (auxjogada != -1) {
+                                            System.out.print(auxjogada + "\t");
+                                        } else {
+                                            System.out.print("-\t");
+                                        }
+                                    }
+                                    
+                                    do{
+                                        System.out.println("Qual a jogada ? (1 - 13)");
+                                        jogada = teclado.nextInt();
+                                    }while(jogada < 1 || jogada > 13);
+
+                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].validarJogada(jogada);
+                                    
+                                    
 
 
 
@@ -161,13 +180,13 @@ public class Campeonato {
                     }
                     else if( jogadores[i] instanceof Maquina){
 
-                        if (jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 20) {
+                        if (jogadores[i].getSaldo() > 20) {
                             valorAposta = (float)20;
                         }
-                        else if (jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 10) {
+                        else if (jogadores[i].getSaldo() > 10) {
                             valorAposta = (float)10;
                         }
-                        else if(jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 5){
+                        else if(jogadores[i].getSaldo() > 5){
                             valorAposta = (float)5;
                         }
                         else{

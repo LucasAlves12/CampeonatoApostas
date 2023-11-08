@@ -4,11 +4,13 @@ public abstract class Jogador {
     private String nome;
     private JogoDados[] jogo;
     private int nJogos;
+    private Float saldo;
 
     public Jogador(String nome) {
         this.nome = nome;
         this.jogo = new JogoDados[10];
         this.nJogos = 0;
+        this.saldo = (float) 100;
     }
 
     public int getnJogos() {
@@ -25,6 +27,10 @@ public abstract class Jogador {
         for (int i = 0; i < nJogos; i++) {
             System.out.println(jogo[i].toString());
         }
+    }
+
+    public int getPontuacaoRodada(int i,int x) {
+        return jogo[i].getPontuacao(x);
     }
 
     public String getTipoJogador(){
@@ -51,8 +57,12 @@ public abstract class Jogador {
        return this.nome;
     }
 
-    public float getSaldo(int i) {
-        return jogo[i].getSaldo();
+    public float getSaldo() {
+        return saldo;
+    }
+
+    public void iniciarJogo(float valorAposta) {
+        //Fazer o inicirJogo e apostar o dinheiro certo
     }
 
 

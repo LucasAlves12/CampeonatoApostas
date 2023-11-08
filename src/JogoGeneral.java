@@ -102,6 +102,7 @@ public class JogoGeneral extends JogoDados implements Serializable{
         jogadas[pos-1] = pont;
     }
 
+
     public String toString(){
         String s = "";
         for(int i = 0;i < 5;i++){
