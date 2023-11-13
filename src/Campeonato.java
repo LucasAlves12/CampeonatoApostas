@@ -117,6 +117,7 @@ public class Campeonato {
 
                         System.out.println("Qual o valor da aposta ?");
                         valorAposta = teclado.nextFloat();
+                        teclado.nextLine();
 
                         }while(valorAposta < 0);
 

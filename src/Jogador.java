@@ -22,6 +22,10 @@ public abstract class Jogador {
             jogo[i].rolarDados();
         }
     }
+
+    public Float getSaldo() {
+        return saldo;
+    }
     
     public void mostrarJogadasExecutadas(){
         for (int i = 0; i < nJogos; i++) {
@@ -59,5 +63,9 @@ public abstract class Jogador {
 
     public Float getSaldo(int i) {
         return jogo[i].getSaldo();
+    }
+
+    public void iniciarJogo() {
+
     }
 }
