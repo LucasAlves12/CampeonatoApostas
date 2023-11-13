@@ -21,7 +21,7 @@ public abstract class JogoDados implements Estatistica {
             dados[i].roll();
         }
     }
-
+  
     public Dado[] getDados() {
         return dados;
     }

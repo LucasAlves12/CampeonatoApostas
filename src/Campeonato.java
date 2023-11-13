@@ -25,7 +25,6 @@ public class Campeonato {
 
         System.out.println("Insira seu nome: ");
         String nome = teclado.nextLine();
-
         do {
             System.out.println("Tipo de jogador (H - humano ou M - maquina):");
             p = teclado.nextLine().toUpperCase().charAt(0);
@@ -38,21 +37,18 @@ public class Campeonato {
 
                 System.out.println("Insira seu CPF: ");
                 String cpf = teclado.nextLine();
-                teclado.nextLine();
                 System.out.println("Insira sua agencia: ");
                 String agencia = teclado.nextLine();
-                teclado.nextLine();
                 System.out.println("Insira sua conta: ");
                 String conta = teclado.nextLine();
-                teclado.nextLine();
                 System.out.println("Insira o numero do banco: ");
                 int numeroBanco = teclado.nextInt();
 
 
 
-
                 jogadores[qtdJogadores] = new Humano(nome, cpf, agencia, conta, numeroBanco);
                 qtdJogadores++;
+                cpf =  teclado.nextLine();
             }
             else{
                 jogadores[qtdJogadores] = new Maquina(nome);
@@ -69,9 +65,14 @@ public class Campeonato {
         int aux;
         int i;
 
+        System.out.println("----- Jogadores -----");  
+        for (i = 0; i < qtdJogadores; i++) {
+            System.out.println(jogadores[i].getNome() + "\t");
+        }
+
         System.out.println("Informe o nome da pessoa que deseja remover:");
         nomeAux = teclado.nextLine();
-        teclado.nextLine();
+
         for (i = 0; i < qtdJogadores; i++) {
             if (jogadores[i].getNome().equals(nomeAux)) {
                 jogadores[i] = null;
@@ -121,7 +122,7 @@ public class Campeonato {
 
                         do{
 
-                            System.out.println("Qual jogo sera jogado ? (G - General ou A - Dados)");
+                            System.out.println("Qual jogo sera jogado ? (G - General ou A - Azar)");
                             opcao = teclado.nextLine().toUpperCase().charAt(0);
                             teclado.nextLine();
 
@@ -130,7 +131,7 @@ public class Campeonato {
                         
 
                             if(opcao == 'G'){
-                                jogadores[i].addJogo(new JogoGeneral(valorAposta));
+                                jogadores[i].addJogo(i, opcao, valorAposta);
 
                                 for(int j = 0; j < 13; j++){
 
@@ -166,14 +167,19 @@ public class Campeonato {
                             }
 
                             else if(opcao == 'A'){
-                                jogadores[i].addJogo(new JogoAzar(valorAposta));
+                                jogadores[i].addJogo(i, opcao, valorAposta);
                                 
-                                do{
+                                //do{
                                     jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
                                     s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
 
-                                }while(s == false);
-                                    
+                                //}while(s == false);
+                                    if(s == true){
+                                        System.out.println("Você ganhou!");
+                                    }
+                                    else{
+                                        System.out.println("Você perdeu!");
+                                    }
                             }
                     
                         
@@ -196,7 +202,7 @@ public class Campeonato {
                         int opcaoMaquina = (int)(Math.random() * 2);
 
                         if(opcaoMaquina == 0){
-                            jogadores[i].addJogo(new JogoGeneral(valorAposta));
+                            jogadores[i].addJogo(i, 'G', valorAposta);
 
                             for(int j = 0; j < 13; j++){
 
@@ -206,7 +212,7 @@ public class Campeonato {
                             }
                         }
                         else{
-                            jogadores[i].addJogo(new JogoAzar(valorAposta));
+                            jogadores[i].addJogo(i, 'A', valorAposta);
                             do{
                                 jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
                                 s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();

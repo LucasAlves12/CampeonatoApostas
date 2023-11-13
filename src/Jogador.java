@@ -46,25 +46,18 @@ public abstract class Jogador {
         return jogo;
     }
 
-    public void addJogo(JogoDados jogo) {
-        this.jogo[nJogos] = jogo;
-        nJogos++;
-        
-
+    public void addJogo(int i, char c, float v) {
+        if (c == 'A')
+            jogo[i] = new JogoAzar(v);
+        else
+            jogo[i] = new JogoGeneral(v);
     }
 
     public String getNome() {
        return this.nome;
     }
 
-    public float getSaldo() {
-        return saldo;
+    public Float getSaldo(int i) {
+        return jogo[i].getSaldo();
     }
-
-    public void iniciarJogo(float valorAposta) {
-        //Fazer o inicirJogo e apostar o dinheiro certo
-    }
-
-
-
 }
