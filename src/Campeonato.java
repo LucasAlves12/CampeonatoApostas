@@ -100,7 +100,7 @@ public class Campeonato {
             
             for(int i = 0; i < qtdJogadores; i++){
 
-                if(jogadores[i].getSaldo(i) <= 0){
+                if(jogadores[i].getSaldo() <= 0){
                     System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
                     break;
                 }
@@ -120,7 +120,7 @@ public class Campeonato {
 
                             System.out.println("Qual jogo sera jogado ? (G - General ou A - Azar)");
                             opcao = teclado.nextLine().toUpperCase().charAt(0);
-                            teclado.nextLine();
+                            //teclado.nextLine();
 
                         }while (opcao != 'G' && opcao != 'A') ;
                             
@@ -167,13 +167,13 @@ public class Campeonato {
                     }
                     else if( jogadores[i] instanceof Maquina){
 
-                        if (jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 20) {
+                        if (jogadores[i].getSaldo() > 20) {
                             valorAposta = (float)20;
                         }
-                        else if (jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 10) {
+                        else if (jogadores[i].getSaldo() > 10) {
                             valorAposta = (float)10;
                         }
-                        else if(jogadores[i].getSaldo(jogadores[i].getnJogos()-1) > 5){
+                        else if(jogadores[i].getSaldo() > 5){
                             valorAposta = (float)5;
                         }
                         else{
