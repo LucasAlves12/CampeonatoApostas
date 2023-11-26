@@ -102,8 +102,6 @@ public class Campeonato {
             
             for(int i = 0; i < qtdJogadores; i++){
 
-                jogadores[i].iniciarJogo();
-
                 if(jogadores[i].getSaldo() <= 0){
                     System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
                     break;
@@ -125,7 +123,7 @@ public class Campeonato {
 
                             System.out.println("Qual jogo sera jogado ? (G - General ou A - Azar)");
                             opcao = teclado.nextLine().toUpperCase().charAt(0);
-                            teclado.nextLine();
+                            //teclado.nextLine();
 
                         }while (opcao != 'G' && opcao != 'A') ;
                             
