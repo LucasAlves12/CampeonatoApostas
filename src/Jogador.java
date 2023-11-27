@@ -4,11 +4,13 @@ public abstract class Jogador {
     private String nome;
     private JogoDados[] jogo;
     private int nJogos;
+    private float saldo;
 
     public Jogador(String nome) {
         this.nome = nome;
         this.jogo = new JogoDados[10];
         this.nJogos = 0;
+        this.saldo = 100;
     }
 
     public int getnJogos() {
@@ -51,7 +53,7 @@ public abstract class Jogador {
        return this.nome;
     }
 
-    public Float getSaldo(int i) {
-        return jogo[i].getSaldo();
+    public Float getSaldo() {
+        return saldo;
     }
 }
