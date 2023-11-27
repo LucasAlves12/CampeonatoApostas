@@ -91,7 +91,7 @@ public class Campeonato {
 
     public void iniciarCampeonato() {
         Float valorAposta;
-        char opcao;
+        char opcao= ' ';
         boolean s = false;
 
         if (qtdJogadores == 0) {
@@ -109,20 +109,19 @@ public class Campeonato {
 
                     if(jogadores[i] instanceof Humano){
                     
-                        do{
-
-                        System.out.println("Qual o valor da aposta ?");
-                        valorAposta = teclado.nextFloat();
-
-                        }while(valorAposta < 0);
-
-                        do{
-
+                        do {
+                            System.out.println("Qual o valor da aposta ?");
+                            valorAposta = teclado.nextFloat();
+                            teclado.nextLine(); // consume the leftover newline
+                        } while(valorAposta < 0);
+                        
+                        do {
                             System.out.println("Qual jogo sera jogado ? (G - General ou A - Azar)");
-                            opcao = teclado.nextLine().toUpperCase().charAt(0);
-                            //teclado.nextLine();
-
-                        }while (opcao != 'G' && opcao != 'A') ;
+                            String line = teclado.nextLine().toUpperCase();
+                            if (!line.isEmpty()) {
+                                opcao = line.charAt(0);
+                            }
+                        } while (opcao != 'G' && opcao != 'A');
                             
                         
 
@@ -132,11 +131,11 @@ public class Campeonato {
                                 for(int j = 0; j < 13; j++){
 
 
-                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
+                                    jogadores[i].getJogo()[jogadores[i].getnJogos()].rolarDados();
 
                                     System.out.println("Qual a jogada ? (1 - 13)");
                                     int jogada = teclado.nextInt();
-                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].validarJogada(jogada);
+                                    jogadores[i].getJogo()[jogadores[i].getnJogos()].validarJogada(jogada);
 
 
 
@@ -151,8 +150,8 @@ public class Campeonato {
                                 jogadores[i].addJogo(i, opcao, valorAposta);
                                 
                                 //do{
-                                    jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
-                                    s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
+                                    jogadores[i].getJogo()[jogadores[i].getnJogos()].rolarDados();
+                                    s = jogadores[i].getJogo()[jogadores[i].getnJogos()].executarRegrasJogo();
 
                                 //}while(s == false);
                                     if(s == true){
