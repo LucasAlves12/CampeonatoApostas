@@ -109,22 +109,9 @@ public class Campeonato {
 
                     if(jogadores[i] instanceof Humano){
                     
-                        do {
-                            System.out.println("Qual o valor da aposta ?");
-                            valorAposta = teclado.nextFloat();
-                            teclado.nextLine(); // consume the leftover newline
-                        } while(valorAposta < 0);
+                        valorAposta = jogadores[i].escolherAposta();
+                        opcao = jogadores[i].escolherJogo();
                         
-                        do {
-                            System.out.println("Qual jogo sera jogado ? (G - General ou A - Azar)");
-                            String line = teclado.nextLine().toUpperCase();
-                            if (!line.isEmpty()) {
-                                opcao = line.charAt(0);
-                            }
-                        } while (opcao != 'G' && opcao != 'A');
-                            
-                        
-
                             if(opcao == 'G'){
                                 jogadores[i].addJogo(i, opcao, valorAposta);
 
@@ -149,11 +136,6 @@ public class Campeonato {
                             else if(opcao == 'A'){
                                 jogadores[i].addJogo(i, opcao, valorAposta);
                                 
-                                //do{
-                                    jogadores[i].getJogo()[jogadores[i].getnJogos()].rolarDados();
-                                    s = jogadores[i].getJogo()[jogadores[i].getnJogos()].executarRegrasJogo();
-
-                                //}while(s == false);
                                     if(s == true){
                                         System.out.println("Você ganhou!");
                                     }

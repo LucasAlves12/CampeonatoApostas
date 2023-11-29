@@ -7,6 +7,7 @@ public class JogoAzar extends JogoDados {
         this.valorAposta = valorAposta;
     }
 
+    @Override
     public boolean executarRegrasJogo(){
         boolean retorno = false;
         int lancamento = 1;

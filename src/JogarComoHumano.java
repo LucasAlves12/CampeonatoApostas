@@ -1,5 +1,6 @@
 public interface JogarComoHumano {
     
-    int escolherJogo();
+    char escolherJogo();
     int escolherJogada(JogoGeneral jogo);
+    float escolherAposta();
 }

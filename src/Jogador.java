@@ -42,11 +42,13 @@ public abstract class Jogador {
         return jogo;
     }
 
-    public void addJogo(int i, char c, float v) {
+    public boolean addJogo(int i, char c, float v) {
         if (c == 'A')
             jogo[i] = new JogoAzar(v);
         else
             jogo[i] = new JogoGeneral(v);
+
+        return true;
     }
 
     public String getNome() {
@@ -55,5 +57,13 @@ public abstract class Jogador {
 
     public Float getSaldo() {
         return saldo;
+    }
+
+    public float escolherAposta() {
+        return 0.0f;
+    }
+
+    public char escolherJogo() {
+        return 0;
     }
 }
