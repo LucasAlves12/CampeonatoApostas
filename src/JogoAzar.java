@@ -37,7 +37,7 @@ public class JogoAzar extends JogoDados {
                     soma = super.getDados()[0].getSideUp() + super.getDados()[1].getSideUp();
                     System.out.println("Lançamento " + lancamento + ": " + super.getDados()[0].getSideUp() + " + " + super.getDados()[1].getSideUp() + " = " + soma); // print the dice roll
                     lancamento++;
-                    if(soma == 2 || soma == 3 || soma == 11){
+                    if(soma == 2 || soma == 3 || soma == 12){
                         super.setSaldo(super.getSaldo() - valorAposta);
                         retorno = false;
                         return retorno;

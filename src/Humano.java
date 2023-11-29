@@ -46,7 +46,7 @@ public class Humano extends Jogador implements JogarComoHumano {
     }
 
     public boolean addJogo(int i, char c, float v) {
-        boolean s = false;
+        boolean s = true;
 
         if (c == 'A'){
             getJogo()[i] = new JogoAzar(v);
