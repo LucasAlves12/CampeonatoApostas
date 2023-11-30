@@ -44,10 +44,9 @@ public class JogoAzar extends JogoDados {
                         
                         return true;
                     }
-                    else{
-                        return false;
-                    }
+                    
                 }while(valorBuscado != soma);
+                return false;
                 
             }
             

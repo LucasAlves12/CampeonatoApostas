@@ -134,7 +134,7 @@ public class Campeonato {
                             }
 
                             else if(opcao == 'A'){
-                                jogadores[i].addJogo(i, opcao, valorAposta);
+                                s = jogadores[i].addJogo(i, opcao, valorAposta);
                                 
                                     if(s == true){
                                         System.out.println("Você ganhou!");

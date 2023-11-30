@@ -40,7 +40,7 @@ public abstract class JogoDados implements Estatistica {
     }
 
     public boolean executarRegrasJogo() {
-        return false;
+        return true;
     }
 
      public int executarRegrasJogoG(int jogada) {
