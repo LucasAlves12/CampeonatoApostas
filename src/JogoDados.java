@@ -43,7 +43,9 @@ public abstract class JogoDados implements Estatistica {
         return false;
     }
 
-
+     public int executarRegrasJogoG(int jogada) {
+        return 0;
+    }
     public void setDados(Dado[] dados) {
         this.dados = dados;
     }

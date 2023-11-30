@@ -92,7 +92,7 @@ public class Campeonato {
     public void iniciarCampeonato() {
         Float valorAposta;
         char opcao= ' ';
-        boolean s = false;
+        boolean s = false ;
 
         if (qtdJogadores == 0) {
             System.out.println("Não há jogadores suficientes para iniciar o campeonato"); // se não houver jogadores suficientes

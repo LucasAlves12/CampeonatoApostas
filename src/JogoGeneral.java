@@ -21,12 +21,12 @@ public class JogoGeneral extends JogoDados implements Serializable{
     }
 
     //getter da classe
-    public int getPontuacao(int x) {
+    public int getJogoGeneral(int x) {
         return jogadas[x];
     }
 
     //lógica do calculo de pontos na jogada
-    public int validarJogada(int x) {
+    public int executarRegrasJogoG(int x) {
         int cont[] = new int[6];//vetor que contem quantos vezes cada numero caiu nos dados na rodada
         int soma = 0;//soma de todos os dados
 

@@ -9,7 +9,6 @@ public class JogoAzar extends JogoDados {
 
     @Override
     public boolean executarRegrasJogo(){
-        boolean retorno = false;
         int lancamento = 1;
         int i=0;
 
@@ -18,13 +17,12 @@ public class JogoAzar extends JogoDados {
             
             if((soma == 7 || soma == 11)){
                 super.setSaldo(super.getSaldo() + valorAposta);
-                retorno = true;
-                return retorno;
+                return true;
             }
             else if(soma == 2 || soma == 3 || soma == 12){
                 super.setSaldo(super.getSaldo() - valorAposta);
-                retorno = false;
-                return retorno;
+                
+                return false;
             }
             else{
                 valorBuscado = soma;
@@ -39,22 +37,20 @@ public class JogoAzar extends JogoDados {
                     lancamento++;
                     if(soma == 2 || soma == 3 || soma == 12){
                         super.setSaldo(super.getSaldo() - valorAposta);
-                        retorno = false;
-                        return retorno;
+                        return false;
                     }
                     else if(soma == valorBuscado){
                         super.setSaldo(super.getSaldo() + valorAposta);
-                        retorno = true;
-                        return retorno;
+                        
+                        return true;
                     }
                     else{
-                        retorno = false;
+                        return false;
                     }
                 }while(valorBuscado != soma);
                 
             }
             
-            return retorno;
     }
 
 }
