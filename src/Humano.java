@@ -55,14 +55,23 @@ public class Humano extends Jogador implements JogarComoHumano {
         if (c == 'A'){
             getJogo()[i] = new JogoAzar(v);
             getJogo()[i].rolarDados();
-            return getJogo()[i].executarRegrasJogo();
-            
+            if( getJogo()[i].executarRegrasJogo() == true){ 
+                WinSaldo(v);
+                
+                System.out.println("Você ganhou!!! Seu novo saldo : " + getSaldo());
+                return true;
+            }
+            LoseSaldo(v);
+             System.out.println("Você perdeu!!! Seu novo saldo : " + getSaldo());
+             return false;
         }
 
         else{
             getJogo()[i] = new JogoGeneral(v);
             for(i = 0;i < 13; i++){
-                getJogo()[i].rolarDados();                   
+                getJogo()[i].rolarDados();     
+                
+                getJogo()[i].JogadasDisponiveis();
                 
                 System.out.println("Que jogada deseja fazer? (1-13): ");
                 int jogada = sc.nextInt();

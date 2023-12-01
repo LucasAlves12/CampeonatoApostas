@@ -59,6 +59,13 @@ public abstract class Jogador {
         return saldo;
     }
 
+    public void WinSaldo(Float saldo) {
+        this.saldo += saldo;
+    }
+    public void LoseSaldo(Float saldo) {
+        this.saldo -= saldo;
+    }
+
     public float escolherAposta() {
         return 0.0f;
     }

@@ -25,6 +25,14 @@ public class JogoGeneral extends JogoDados implements Serializable{
         return jogadas[x];
     }
 
+    public void JogadasDispoiveis(){
+        System.out.println("1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13");
+        for(int i = 0;i < 13;i++){
+            if(jogadas[i] == 0)System.out.print("- \t");
+            else System.out.print(jogadas[i] + "\t");
+        }
+    }
+
     //lógica do calculo de pontos na jogada
     public int executarRegrasJogoG(int x) {
         int cont[] = new int[6];//vetor que contem quantos vezes cada numero caiu nos dados na rodada
