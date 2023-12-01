@@ -1,22 +1,24 @@
 import java.io.Serializable;
 public class JogoGeneral extends JogoDados implements Serializable{
 
-    private int[] jogadas = new int[13];
+    private int[] jogadas;
     private float valorAposta;
 
     public JogoGeneral(float valorAposta) {
 
         super(5, "General", 100);
         this.valorAposta = valorAposta;
+        this.jogadas = new int[13];
+        for(int i = 0;i < 13;i++){
+            jogadas[i] = -1;
+        }
 
     }
 
 
     //Dados são sorteados aleatoriamente a cada rodada
     public void rolarDados() { 
-        for (int i = 0; i < 5; i++) {
-            super.rolarDados();
-        }
+        rolarDados();
         System.out.println("Valores obtidos: "+this.toString());
     }
 
@@ -37,7 +39,6 @@ public class JogoGeneral extends JogoDados implements Serializable{
     public int executarRegrasJogoG(int x) {
         int cont[] = new int[6];//vetor que contem quantos vezes cada numero caiu nos dados na rodada
         int soma = 0;//soma de todos os dados
-
         
 
         for (int i = 0; i < 5; i++) {
@@ -108,6 +109,12 @@ public class JogoGeneral extends JogoDados implements Serializable{
 
     public void pontuarJogada(int pos, int pont) {
         jogadas[pos-1] = pont;
+    }
+
+    public boolean validarJogada(int x) {
+        if(x < 1 || x > 13)return false;
+        else if(jogadas[x-1] == -1)return true;
+        else return false;
     }
 
     public String toString(){

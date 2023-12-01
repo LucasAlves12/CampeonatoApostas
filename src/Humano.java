@@ -51,6 +51,7 @@ public class Humano extends Jogador implements JogarComoHumano {
         int PontosJogada;
         int treze = 0; 
         int total = 0;
+        int jogada = 0;
 
         if (c == 'A'){
             getJogo()[i] = new JogoAzar(v);
@@ -73,8 +74,16 @@ public class Humano extends Jogador implements JogarComoHumano {
                 
                 getJogo()[i].JogadasDisponiveis();
                 
+                boolean s;
+                do{
                 System.out.println("Que jogada deseja fazer? (1-13): ");
-                int jogada = sc.nextInt();
+                    jogada = sc.nextInt();
+
+                    s = getJogo()[i].validarJogada(jogada);
+                }while(!s);
+
+
+                
                 PontosJogada = getJogo()[i].executarRegrasJogoG(jogada);
 
                 if(jogada == 13) treze = PontosJogada;

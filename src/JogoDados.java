@@ -35,9 +35,6 @@ public abstract class JogoDados implements Estatistica {
         return dado.getSideUp();
     }
 
-    public int validarJogada(int x) {
-        return 0;
-    }
 
     public boolean executarRegrasJogo() {
         return true;
@@ -65,5 +62,12 @@ public abstract class JogoDados implements Estatistica {
             soma += dados[i].getSideUp();
         }
         return soma;
+    }
+
+    public void JogadasDisponiveis() {
+    }
+
+    public boolean validarJogada(int jogada) {
+        return false;
     }
 }

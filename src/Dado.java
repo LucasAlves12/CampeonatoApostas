@@ -4,7 +4,7 @@ public class Dado {
     private int sideUp;
     
     public Dado() {
-        sideUp = 1;
+        sideUp = -1;
     }
 
     public int getSideUp() {

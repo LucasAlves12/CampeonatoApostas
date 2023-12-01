@@ -12,11 +12,10 @@ public class Campeonato {
     private File arq = new File("jogoGeneral.dat");
     private Scanner teclado = new Scanner(System.in);
 
-     public Campeonato() {
+    public Campeonato() {
         jogadores = new Jogador[10];
         qtdJogadores = 0;
         maxJogadores = 10;
-        
 
     }
 
@@ -32,8 +31,7 @@ public class Campeonato {
 
         if (qtdJogadores < maxJogadores) {
 
-            
-            if(p == 'H'){
+            if (p == 'H') {
 
                 System.out.println("Insira seu CPF: ");
                 String cpf = teclado.nextLine();
@@ -44,13 +42,10 @@ public class Campeonato {
                 System.out.println("Insira o numero do banco: ");
                 int numeroBanco = teclado.nextInt();
 
-
-
                 jogadores[qtdJogadores] = new Humano(nome, cpf, agencia, conta, numeroBanco);
                 qtdJogadores++;
-                cpf =  teclado.nextLine();
-            }
-            else{
+                cpf = teclado.nextLine();
+            } else {
                 jogadores[qtdJogadores] = new Maquina(nome);
                 qtdJogadores++;
             }
@@ -65,7 +60,7 @@ public class Campeonato {
         int aux;
         int i;
 
-        System.out.println("----- Jogadores -----");  
+        System.out.println("----- Jogadores -----");
         for (i = 0; i < qtdJogadores; i++) {
             System.out.println(jogadores[i].getNome() + "\t");
         }
@@ -91,103 +86,74 @@ public class Campeonato {
 
     public void iniciarCampeonato() {
         Float valorAposta;
-        char opcao= ' ';
+        char opcao = ' ';
         boolean s = false;
 
         if (qtdJogadores == 0) {
-            System.out.println("Não há jogadores suficientes para iniciar o campeonato"); // se não houver jogadores suficientes
-        }else{
-            
-            for(int i = 0; i < qtdJogadores; i++){
+            System.out.println("Não há jogadores suficientes para iniciar o campeonato");
+            return;
+        }
+        // se não houver jogadores
+        // suficientes
 
-                if(jogadores[i].getSaldo() <= 0){
-                    System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
-                    break;
+        for (int i = 0; i < qtdJogadores; i++) {
+
+            if (jogadores[i].getSaldo() <= 0) {
+                System.out
+                        .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                break;
+            }
+
+            if (jogadores[i] instanceof Humano) {
+
+                valorAposta = jogadores[i].escolherAposta();
+                opcao = jogadores[i].escolherJogo();
+
+                if (opcao == 'G') {
+                    jogadores[i].addJogo(i, opcao, valorAposta);
+
                 }
 
-                else{
+                else if (opcao == 'A') {
+                    s = jogadores[i].addJogo(i, opcao, valorAposta);
 
-                    if(jogadores[i] instanceof Humano){
-                    
-                        valorAposta = jogadores[i].escolherAposta();
-                        opcao = jogadores[i].escolherJogo();
-                        
-                            if(opcao == 'G'){
-                                jogadores[i].addJogo(i, opcao, valorAposta);
+                }
 
-                                for(int j = 0; j < 13; j++){
+            } else if (jogadores[i] instanceof Maquina) {
 
+                if (jogadores[i].getSaldo() > 20) {
+                    valorAposta = (float) 20;
+                } else if (jogadores[i].getSaldo() > 10) {
+                    valorAposta = (float) 10;
+                } else if (jogadores[i].getSaldo() > 5) {
+                    valorAposta = (float) 5;
+                } else {
+                    valorAposta = (float) 1;
+                }
 
-                                    jogadores[i].getJogo()[jogadores[i].getnJogos()].rolarDados();
+                int opcaoMaquina = (int) (Math.random() * 2);
 
-                                    System.out.println("Qual a jogada ? (1 - 13)");
-                                    int jogada = teclado.nextInt();
-                                    jogadores[i].getJogo()[jogadores[i].getnJogos()].validarJogada(jogada);
+                if (opcaoMaquina == 0) {
+                    jogadores[i].addJogo(i, 'G', valorAposta);
 
+                    for (int j = 0; j < 13; j++) {
+                        jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
+                        // fazer a logica de jogada da maquina
 
-
-
-
-                                }
-
-
-                            }
-
-                            else if(opcao == 'A'){
-                                s = jogadores[i].addJogo(i, opcao, valorAposta);
-                                
-                                    if(s == true){
-                                        System.out.println("Você ganhou!");
-                                    }
-                                    else{
-                                        System.out.println("Você perdeu!");
-                                    }
-                            }
-                    
-                        
                     }
-                    else if( jogadores[i] instanceof Maquina){
+                } else {
+                    jogadores[i].addJogo(i, 'A', valorAposta);
+                    do {
+                        jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
+                        s = jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].executarRegrasJogo();
 
-                        if (jogadores[i].getSaldo() > 20) {
-                            valorAposta = (float)20;
-                        }
-                        else if (jogadores[i].getSaldo() > 10) {
-                            valorAposta = (float)10;
-                        }
-                        else if(jogadores[i].getSaldo() > 5){
-                            valorAposta = (float)5;
-                        }
-                        else{
-                            valorAposta = (float)1;
-                        }
-                        
-                        int opcaoMaquina = (int)(Math.random() * 2);
+                    } while (s == false);
+                }
 
-                        if(opcaoMaquina == 0){
-                            jogadores[i].addJogo(i, 'G', valorAposta);
-
-                            for(int j = 0; j < 13; j++){
-
-                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
-                                //fazer a logica de jogada da maquina
-
-                            }
-                        }
-                        else{
-                            jogadores[i].addJogo(i, 'A', valorAposta);
-                            do{
-                                jogadores[i].getJogo()[jogadores[i].getnJogos()-1].rolarDados();
-                                s = jogadores[i].getJogo()[jogadores[i].getnJogos()-1].executarRegrasJogo();
-
-                            }while(s == false);
-                        }
-                    }
-                }   
             }
         }
+
     }
-    
-    
 
     public void mostrarCartela() {
         int i;
@@ -200,7 +166,7 @@ public class Campeonato {
         System.out.println();
     }
 
-    public void extrato(){//Analisar este código
+    public void extrato() {// Analisar este código
         int i;
         System.out.println("----- Extrato de Jogos -----\n");
         System.out.printf("%s", "\t");
@@ -210,7 +176,7 @@ public class Campeonato {
         System.out.println();
     }
 
-    public void estatisticas(){ //Analisar este código
+    public void estatisticas() { // Analisar este código
         int i;
         System.out.println("----- Estatisticas -----\n");
         System.out.printf("%s", "\t");
@@ -220,7 +186,7 @@ public class Campeonato {
         System.out.println();
     }
 
-     //grava em arquivo .dat a rodada executada
+    // grava em arquivo .dat a rodada executada
     public void gravarEmArquivo() {
         try {
             FileOutputStream fout = new FileOutputStream(arq);
@@ -238,7 +204,7 @@ public class Campeonato {
 
     }
 
-    //le os dados do arquvo .dat
+    // le os dados do arquvo .dat
     public void lerDoArquivo() {
         try {
             FileInputStream fin = new FileInputStream(arq);
@@ -251,9 +217,9 @@ public class Campeonato {
             fin.close();
             jogadores = jogaArq;
             qtdJogadores = 0;
-            
-            for(Jogador j : jogadores) {
-                if(j != null) {
+
+            for (Jogador j : jogadores) {
+                if (j != null) {
                     qtdJogadores++;
                 }
             }
