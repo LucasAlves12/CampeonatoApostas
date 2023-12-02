@@ -13,6 +13,12 @@ public abstract class Jogador {
         this.saldo = 100;
     }
 
+    abstract void jogarGeneral(int rodada, float valorAposta);
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
     public int getnJogos() {
         return nJogos;
     }
@@ -22,19 +28,21 @@ public abstract class Jogador {
             jogo[i].rolarDados();
         }
     }
-    
-    public void mostrarJogadasExecutadas(){
+
+    public void mostrarJogadasExecutadas() {
         for (int i = 0; i < nJogos; i++) {
             System.out.println(jogo[i].toString());
         }
     }
 
-    public String getTipoJogador(){
+    public String getTipoJogador() {
         String tipo;
 
-        if(this instanceof Humano)tipo = "H";
-        else  tipo = "M";
-       
+        if (this instanceof Humano)
+            tipo = "H";
+        else
+            tipo = "M";
+
         return tipo;
     }
 
@@ -52,7 +60,7 @@ public abstract class Jogador {
     }
 
     public String getNome() {
-       return this.nome;
+        return this.nome;
     }
 
     public Float getSaldo() {
@@ -62,6 +70,7 @@ public abstract class Jogador {
     public void WinSaldo(Float saldo) {
         this.saldo += saldo;
     }
+
     public void LoseSaldo(Float saldo) {
         this.saldo -= saldo;
     }
@@ -72,5 +81,10 @@ public abstract class Jogador {
 
     public char escolherJogo() {
         return 0;
+    }
+
+    public void execGeneral(int rodada, float valorAposta, char tipoJogador){
+        jogo[rodada] = new JogoGeneral(valorAposta);
+        saldo += jogo[rodada].jogarJogos(tipoJogador);
     }
 }

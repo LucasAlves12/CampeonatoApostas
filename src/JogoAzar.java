@@ -52,4 +52,9 @@ public class JogoAzar extends JogoDados {
             
     }
 
+    @Override
+    public float jogarJogos(char tipoJog) {
+        return 0;
+    }
+
 }

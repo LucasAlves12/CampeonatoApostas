@@ -96,60 +96,61 @@ public class Campeonato {
         // se não houver jogadores
         // suficientes
 
-        for (int i = 0; i < qtdJogadores; i++) {
+        for (int rodada = 0; rodada < 10; rodada++) {
+            for (int i = 0; i < qtdJogadores; i++) {
 
-            if (jogadores[i].getSaldo() <= 0) {
-                System.out
-                        .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
-                break;
-            }
-
-            if (jogadores[i] instanceof Humano) {
-
-                valorAposta = jogadores[i].escolherAposta();
-                opcao = jogadores[i].escolherJogo();
-
-                if (opcao == 'G') {
-                    jogadores[i].addJogo(i, opcao, valorAposta);
-
+                if (jogadores[i].getSaldo() <= 0) {
+                    System.out
+                            .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                    break;
                 }
 
-                else if (opcao == 'A') {
-                    s = jogadores[i].addJogo(i, opcao, valorAposta);
+                if (jogadores[i] instanceof Humano) {
 
-                }
+                    valorAposta = jogadores[i].escolherAposta();
+                    opcao = jogadores[i].escolherJogo();
 
-            } else if (jogadores[i] instanceof Maquina) {
+                    if (opcao == 'G') {
+                        jogadores[i].jogarGeneral(i,valorAposta);
+                    }
 
-                if (jogadores[i].getSaldo() > 20) {
-                    valorAposta = (float) 20;
-                } else if (jogadores[i].getSaldo() > 10) {
-                    valorAposta = (float) 10;
-                } else if (jogadores[i].getSaldo() > 5) {
-                    valorAposta = (float) 5;
-                } else {
-                    valorAposta = (float) 1;
-                }
-
-                int opcaoMaquina = (int) (Math.random() * 2);
-
-                if (opcaoMaquina == 0) {
-                    jogadores[i].addJogo(i, 'G', valorAposta);
-
-                    for (int j = 0; j < 13; j++) {
-                        jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
-                        // fazer a logica de jogada da maquina
+                    else if (opcao == 'A') {
+                        s = jogadores[i].addJogo(i, opcao, valorAposta);
 
                     }
-                } else {
-                    jogadores[i].addJogo(i, 'A', valorAposta);
-                    do {
-                        jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
-                        s = jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].executarRegrasJogo();
 
-                    } while (s == false);
+                } else if (jogadores[i] instanceof Maquina) {
+
+                    if (jogadores[i].getSaldo() > 20) {
+                        valorAposta = (float) 20;
+                    } else if (jogadores[i].getSaldo() > 10) {
+                        valorAposta = (float) 10;
+                    } else if (jogadores[i].getSaldo() > 5) {
+                        valorAposta = (float) 5;
+                    } else {
+                        valorAposta = (float) 1;
+                    }
+
+                    int opcaoMaquina = (int) (Math.random() * 2);
+
+                    if (opcaoMaquina == 0) {
+                        jogadores[i].addJogo(i, 'G', valorAposta);
+
+                        for (int j = 0; j < 13; j++) {
+                            jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
+                            // fazer a logica de jogada da maquina
+
+                        }
+                    } else {
+                        jogadores[i].addJogo(i, 'A', valorAposta);
+                        do {
+                            jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
+                            s = jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].executarRegrasJogo();
+
+                        } while (s == false);
+                    }
+
                 }
-
             }
         }
 

@@ -66,8 +66,8 @@ public class Humano extends Jogador implements JogarComoHumano {
              System.out.println("Você perdeu!!! Seu novo saldo : " + getSaldo());
              return false;
         }
-
-        else{
+        return false;
+        /*else{
             getJogo()[i] = new JogoGeneral(v);
             for(i = 0;i < 13; i++){
                 getJogo()[i].rolarDados();     
@@ -92,8 +92,14 @@ public class Humano extends Jogador implements JogarComoHumano {
             }
             if(treze*2 < total) return true;
             else return false;
-        }
+        }*/
         
+    }
+
+    public void jogarGeneral(int rodada, float valorAposta){
+        super.setSaldo(super.getSaldo() - valorAposta);
+
+        super.execGeneral(rodada, valorAposta,'H');
     }
 
 }

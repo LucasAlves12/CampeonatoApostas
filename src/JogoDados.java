@@ -64,9 +64,8 @@ public abstract class JogoDados implements Estatistica {
         return soma;
     }
 
-    public void JogadasDisponiveis() {
-    }
-
+    public abstract float jogarJogos(char tipoJog);
+    
     public boolean validarJogada(int jogada) {
         return false;
     }
