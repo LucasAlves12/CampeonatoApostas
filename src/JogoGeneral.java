@@ -58,7 +58,8 @@ public class JogoGeneral extends JogoDados implements Serializable {
                 do{
                     System.out.println("\nEscolha uma jogada (1-13): ");
                     escolha = sc.nextInt();
-                }while(escolha < 1 || escolha > 13);
+                }while(escolha < 1 || escolha > 13 || jogadas[escolha-1] != -1);
+
                 if(jogadas[escolha-1] == -1){
                     pontuarJogada(escolha, executarRegrasJogoG(escolha));
                 }
