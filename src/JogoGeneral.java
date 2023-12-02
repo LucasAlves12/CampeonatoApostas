@@ -6,9 +6,9 @@ public class JogoGeneral extends JogoDados implements Serializable {
     private int[] jogadas;
     private float valorAposta;
 
-    public JogoGeneral(float valorAposta) {
+    public JogoGeneral(float valorAposta,float saldo) {
 
-        super(5, "General", 100);
+        super(5, "General", saldo);
         this.valorAposta = valorAposta;
         this.jogadas = new int[13];
         for (int i = 0; i < 13; i++) {
@@ -62,12 +62,14 @@ public class JogoGeneral extends JogoDados implements Serializable {
             for (int i = 0; i < 12; i++) {
                 total += jogadas[i];
             }
+            float saldo = getSaldo();
             if(total > (jogadas[12]*2)){
-                System.out.println("Você ganhou!!! Seu novo saldo : " + getSaldo());
+                saldo += valorAposta;
+                System.out.println("Você ganhou!!! Seu novo saldo : " + saldo);
                 return (valorAposta*2);//ganhou
             }
             else{
-                System.out.println("Você perdeu!!! Seu novo saldo : " + getSaldo());
+                System.out.println("Você perdeu!!! Seu novo saldo : " + saldo);
                 return 0;//perdeu
             }
         }

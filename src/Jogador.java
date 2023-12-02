@@ -56,7 +56,7 @@ public abstract class Jogador {
         if (c == 'A')
             jogo[i] = new JogoAzar(v);
         else
-            jogo[i] = new JogoGeneral(v);
+            jogo[i] = new JogoGeneral(v, saldo);
 
         return true;
     }
@@ -86,7 +86,7 @@ public abstract class Jogador {
     }
 
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
-        jogo[rodada] = new JogoGeneral(valorAposta);
+        jogo[rodada] = new JogoGeneral(valorAposta,saldo);
         saldo += jogo[rodada].jogarJogos(tipoJogador);
     }
 
