@@ -82,7 +82,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
                     System.out.print(super.getDado(j).getSideUp() + " ");
                 }
 
-                pontuarJogada(i, executarRegrasJogoG(i));
+                pontuarJogada(i+1, executarRegrasJogoG(i+1));
             }
             int total = 0;
             for (int i = 0; i < 12; i++) {
