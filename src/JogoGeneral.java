@@ -82,7 +82,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
                     System.out.print(super.getDado(j).getSideUp() + " ");
                 }
 
-                pontuarJogada(i, executarRegrasJogoG(i));
+                jogadas[i] = executarRegrasJogoG(i+1);
             }
             int total = 0;
             for (int i = 0; i < 12; i++) {
@@ -92,18 +92,22 @@ public class JogoGeneral extends JogoDados implements Serializable {
             if(total > (jogadas[12]*2)){
                 saldo += valorAposta;
                 System.out.println("Você ganhou!!! Seu novo saldo : " + saldo);
-                return (valorAposta*2);//ganhou
+                return (valorAposta*2);
             }
             else{
                 System.out.println("Você perdeu!!! Seu novo saldo : " + saldo);
-                return 0;//perdeu
-            }
-            
+                return 0;
+            }  
         }
         
     }
 
+    public void pontuarJogada(int pos, int pont) {
+        jogadas[pos - 1] = pont;
+    }
+
     // lógica do calculo de pontos na jogada
+    @Override
     public int executarRegrasJogoG(int x) {
         int cont[] = new int[6];// vetor que contem quantos vezes cada numero caiu nos dados na rodada
         int soma = 0;// soma de todos os dados
@@ -178,17 +182,15 @@ public class JogoGeneral extends JogoDados implements Serializable {
 
                 return 0;
 
-            case 13:
-                return soma;// jogada aleatória
+            case 13:    return soma;// jogada aleatória
+                
 
         }
         return 0;
 
     }
 
-    public void pontuarJogada(int pos, int pont) {
-        jogadas[pos - 1] = pont;
-    }
+    
 
 
     public String toString() {
