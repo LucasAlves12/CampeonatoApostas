@@ -13,4 +13,10 @@ public class Maquina extends Jogador implements JogarComoMaquina {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'jogarGeneral'");
     }
+
+    @Override
+    void jogarAzar(int rodada, float valorAposta) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'jogarAzar'");
+    }
 }
