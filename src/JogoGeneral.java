@@ -172,14 +172,6 @@ public class JogoGeneral extends JogoDados implements Serializable {
         jogadas[pos - 1] = pont;
     }
 
-    public boolean validarJogada(int x) {
-        if (x < 1 || x > 13)
-            return false;
-        else if (jogadas[x - 1] == -1)
-            return true;
-        else
-            return false;
-    }
 
     public String toString() {
         String s = "";

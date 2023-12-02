@@ -2,8 +2,8 @@ public class JogoAzar extends JogoDados {
     private float valorAposta;
     private Integer valorBuscado = null;
 
-    public JogoAzar(float valorAposta) {
-        super(2, "Jogo do Azar", 100);
+    public JogoAzar(float valorAposta,float saldo) {
+        super(2, "Jogo do Azar", saldo);
         this.valorAposta = valorAposta;
     }
 
@@ -25,7 +25,7 @@ public class JogoAzar extends JogoDados {
                 return (valorAposta*2);
             }
             else if(soma == 2 || soma == 3 || soma == 12){
-                super.setSaldo(super.getSaldo() - valorAposta);
+                super.setSaldo(super.getSaldo());
                 System.out.println("Você perdeu!!! Seu novo saldo : " + super.getSaldo());
                 return 0;
             }
@@ -41,7 +41,7 @@ public class JogoAzar extends JogoDados {
                     System.out.println("Lançamento " + lancamento + ": " + super.getDados()[0].getSideUp() + " + " + super.getDados()[1].getSideUp() + " = " + soma); // print the dice roll
                     lancamento++;
                     if(soma == 2 || soma == 3 || soma == 12){
-                        super.setSaldo(super.getSaldo() - valorAposta);
+                        super.setSaldo(super.getSaldo());
                         System.out.println("Você perdeu!!! Seu novo saldo : " + super.getSaldo());
                         return 0;
                     }
