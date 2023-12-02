@@ -22,20 +22,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
         return jogadas[x];
     }
 
-    public void JogadasDispoiveis() {
-        for (int i = 0; i < 5; i++) {
-            System.out.println("Dados: " + super.getDado(i).getSideUp());
-        }
-
-        System.out.println("1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13");
-        for (int i = 0; i < 13; i++) {
-            if (jogadas[i] == 0)
-                System.out.print("- \t");
-            else
-                System.out.print(jogadas[i] + "\t");
-        }
-    }
-
+  
     public float jogarJogos (char tipoJogador) {
         Scanner sc = new Scanner(System.in);
         int aux=0;

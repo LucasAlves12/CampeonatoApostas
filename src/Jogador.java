@@ -15,6 +15,8 @@ public abstract class Jogador {
 
     abstract void jogarGeneral(int rodada, float valorAposta);
 
+    abstract void jogarAzar(int rodada, float valorAposta);
+
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
@@ -85,6 +87,11 @@ public abstract class Jogador {
 
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
         jogo[rodada] = new JogoGeneral(valorAposta);
+        saldo += jogo[rodada].jogarJogos(tipoJogador);
+    }
+
+    public void execAzar(int rodada, float valorAposta, char tipoJogador){
+        jogo[rodada] = new JogoAzar(valorAposta);
         saldo += jogo[rodada].jogarJogos(tipoJogador);
     }
 }

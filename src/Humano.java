@@ -45,61 +45,17 @@ public class Humano extends Jogador implements JogarComoHumano {
         return tipoJogo;
     }
 
-    public boolean addJogo(int i, char c, float v) {
-        
-        Scanner sc = new Scanner(System.in);
-        int PontosJogada;
-        int treze = 0; 
-        int total = 0;
-        int jogada = 0;
-
-        if (c == 'A'){
-            getJogo()[i] = new JogoAzar(v);
-            getJogo()[i].rolarDados();
-            if( getJogo()[i].executarRegrasJogo() == true){ 
-                WinSaldo(v);
-                
-                System.out.println("Você ganhou!!! Seu novo saldo : " + getSaldo());
-                return true;
-            }
-            LoseSaldo(v);
-             System.out.println("Você perdeu!!! Seu novo saldo : " + getSaldo());
-             return false;
-        }
-        return false;
-        /*else{
-            getJogo()[i] = new JogoGeneral(v);
-            for(i = 0;i < 13; i++){
-                getJogo()[i].rolarDados();     
-                
-                getJogo()[i].JogadasDisponiveis();
-                
-                boolean s;
-                do{
-                System.out.println("Que jogada deseja fazer? (1-13): ");
-                    jogada = sc.nextInt();
-
-                    s = getJogo()[i].validarJogada(jogada);
-                }while(!s);
-
-
-                
-                PontosJogada = getJogo()[i].executarRegrasJogoG(jogada);
-
-                if(jogada == 13) treze = PontosJogada;
-                else total += PontosJogada;
-            
-            }
-            if(treze*2 < total) return true;
-            else return false;
-        }*/
-        
-    }
 
     public void jogarGeneral(int rodada, float valorAposta){
         super.setSaldo(super.getSaldo() - valorAposta);
 
         super.execGeneral(rodada, valorAposta,'H');
+    }
+
+    public void jogarAzar(int rodada, float valorAposta){
+        super.setSaldo(super.getSaldo() - valorAposta);
+
+        super.execAzar(rodada, valorAposta,'H');
     }
 
 }

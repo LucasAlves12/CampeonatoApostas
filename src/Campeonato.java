@@ -115,7 +115,7 @@ public class Campeonato {
                     }
 
                     else if (opcao == 'A') {
-                        s = jogadores[i].addJogo(i, opcao, valorAposta);
+                        jogadores[i].jogarAzar(i,valorAposta);
 
                     }
 
