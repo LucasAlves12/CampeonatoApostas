@@ -20,14 +20,14 @@ public class JogoAzar extends JogoDados {
             System.out.println("Lançamento " + lancamento + ": " + super.getDados()[0].getSideUp() + " + " + super.getDados()[1].getSideUp() + " = " + soma); // print the dice roll
             
             if((soma == 7 || soma == 11)){
-                super.setSaldo(super.getSaldo() + valorAposta);
-                System.out.println("Você ganhou!!! Seu novo saldo : " + super.getSaldo());
-                return (valorAposta*2);
+                super.setSaldo(super.getSaldo() + valorAposta*2);
+                System.out.println("Você ganhou!!!" );
+                return (getSaldo());
             }
             else if(soma == 2 || soma == 3 || soma == 12){
                 super.setSaldo(super.getSaldo());
-                System.out.println("Você perdeu!!! Seu novo saldo : " + super.getSaldo());
-                return 0;
+                System.out.println("Você perdeu!!!" );
+                return getSaldo();
             }
             else{
                 valorBuscado = soma;
@@ -42,13 +42,13 @@ public class JogoAzar extends JogoDados {
                     lancamento++;
                     if(soma == 2 || soma == 3 || soma == 12){
                         super.setSaldo(super.getSaldo());
-                        System.out.println("Você perdeu!!! Seu novo saldo : " + super.getSaldo());
-                        return 0;
+                        System.out.println("Você perdeu!!! ");
+                        return getSaldo();
                     }
                     else if(soma == valorBuscado){
-                        super.setSaldo(super.getSaldo() + valorAposta);
-                        System.out.println("Você ganhou!!! Seu novo saldo : " + super.getSaldo());
-                        return (valorAposta*2);
+                        super.setSaldo(super.getSaldo() + valorAposta*2);
+                        System.out.println("Você ganhou!!! " );
+                        return (getSaldo());
                     }
                     
                 }while(valorBuscado != soma);

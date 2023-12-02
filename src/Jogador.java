@@ -87,11 +87,13 @@ public abstract class Jogador {
 
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
         jogo[rodada] = new JogoGeneral(valorAposta,saldo);
-        saldo += jogo[rodada].jogarJogos(tipoJogador);
+        saldo = jogo[rodada].jogarJogos(tipoJogador);
+        System.out.println("Saldo: " + (saldo));
     }
 
     public void execAzar(int rodada, float valorAposta, char tipoJogador){
         jogo[rodada] = new JogoAzar(valorAposta,saldo);
-        saldo += jogo[rodada].jogarJogos(tipoJogador);
+        saldo = jogo[rodada].jogarJogos(tipoJogador);
+        System.out.println("Saldo: " + (saldo));
     }
 }

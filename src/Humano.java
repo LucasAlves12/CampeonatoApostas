@@ -56,6 +56,7 @@ public class Humano extends Jogador implements JogarComoHumano {
         super.setSaldo(super.getSaldo() - valorAposta);
 
         super.execAzar(rodada, valorAposta,'H');
+        System.out.println("Saldo: " + (getSaldo()));
     }
 
 }

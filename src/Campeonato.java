@@ -100,8 +100,7 @@ public class Campeonato {
             for (int i = 0; i < qtdJogadores; i++) {
 
                 if (jogadores[i].getSaldo() <= 0) {
-                    System.out
-                            .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                    System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
                     break;
                 }
 
@@ -111,11 +110,11 @@ public class Campeonato {
                     opcao = jogadores[i].escolherJogo();
 
                     if (opcao == 'G') {
-                        jogadores[i].jogarGeneral(i,valorAposta);
+                        jogadores[i].jogarGeneral(rodada,valorAposta);
                     }
 
                     else if (opcao == 'A') {
-                        jogadores[i].jogarAzar(i,valorAposta);
+                        jogadores[i].jogarAzar(rodada,valorAposta);
 
                     }
 
