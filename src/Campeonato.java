@@ -106,6 +106,8 @@ public class Campeonato {
 
                 if (jogadores[i] instanceof Humano) {
 
+                    System.out.println("Jogador: " + jogadores[i].getNome());
+
                     valorAposta = jogadores[i].escolherAposta();
                     opcao = jogadores[i].escolherJogo();
 
@@ -120,35 +122,14 @@ public class Campeonato {
 
                 } else if (jogadores[i] instanceof Maquina) {
 
-                    if (jogadores[i].getSaldo() > 20) {
-                        valorAposta = (float) 20;
-                    } else if (jogadores[i].getSaldo() > 10) {
-                        valorAposta = (float) 10;
-                    } else if (jogadores[i].getSaldo() > 5) {
-                        valorAposta = (float) 5;
-                    } else {
-                        valorAposta = (float) 1;
-                    }
+                    System.out.println("Jogador: " + jogadores[i].getNome());
 
-                    int opcaoMaquina = (int) (Math.random() * 2);
+                    valorAposta = jogadores[i].escolherAposta();
+                    int opcaoMaquina = (int) Math.floor((Math.random() * 2));
 
-                    if (opcaoMaquina == 0) {
-                        jogadores[i].addJogo(i, 'G', valorAposta);
-
-                        for (int j = 0; j < 13; j++) {
-                            jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
-                            // fazer a logica de jogada da maquina
-
-                        }
-                    } else {
-                        jogadores[i].addJogo(i, 'A', valorAposta);
-                        do {
-                            jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].rolarDados();
-                            s = jogadores[i].getJogo()[jogadores[i].getnJogos() - 1].executarRegrasJogo();
-
-                        } while (s == false);
-                    }
-
+                    if (opcaoMaquina == 0) jogadores[i].jogarGeneral(rodada, valorAposta); 
+                    else jogadores[i].jogarAzar(rodada, valorAposta);
+                        
                 }
             }
         }

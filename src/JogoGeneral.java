@@ -72,17 +72,35 @@ public class JogoGeneral extends JogoDados implements Serializable {
                 System.out.println("Você perdeu!!! Seu novo saldo : " + saldo);
                 return 0;//perdeu
             }
-        }
-        /*else{//maquina
+        }       
+        else{//maquina
             for (int i = 0; i < 13; i++) {
-                int escolha = 0;
+                
                 super.rolarDados();
                 System.out.println("Dados:");
                 for (int j = 0; j < 5; j++) {
                     System.out.print(super.getDado(j).getSideUp() + " ");
                 }
-        } */
-        return 0;
+
+                pontuarJogada(i, executarRegrasJogoG(i));
+            }
+            int total = 0;
+            for (int i = 0; i < 12; i++) {
+                total += jogadas[i];
+            }
+            float saldo = getSaldo();
+            if(total > (jogadas[12]*2)){
+                saldo += valorAposta;
+                System.out.println("Você ganhou!!! Seu novo saldo : " + saldo);
+                return (valorAposta*2);//ganhou
+            }
+            else{
+                System.out.println("Você perdeu!!! Seu novo saldo : " + saldo);
+                return 0;//perdeu
+            }
+            
+        }
+        
     }
 
     // lógica do calculo de pontos na jogada

@@ -8,9 +8,9 @@ public abstract class Jogador {
 
     public Jogador(String nome) {
         this.nome = nome;
-        this.jogo = new JogoDados[10];
-        this.nJogos = 0;
-        this.saldo = 100;
+        jogo = new JogoDados[10];
+        nJogos = 0;
+        saldo = 100;
     }
 
     abstract void jogarGeneral(int rodada, float valorAposta);
@@ -52,15 +52,6 @@ public abstract class Jogador {
         return jogo;
     }
 
-    public boolean addJogo(int i, char c, float v) {
-        if (c == 'A')
-            jogo[i] = new JogoAzar(v,saldo);
-        else
-            jogo[i] = new JogoGeneral(v, saldo);
-
-        return true;
-    }
-
     public String getNome() {
         return this.nome;
     }
@@ -68,18 +59,8 @@ public abstract class Jogador {
     public Float getSaldo() {
         return saldo;
     }
-
-    public void WinSaldo(Float saldo) {
-        this.saldo += saldo;
-    }
-
-    public void LoseSaldo(Float saldo) {
-        this.saldo -= saldo;
-    }
-
-    public float escolherAposta() {
-        return 0.0f;
-    }
+    
+    public abstract float escolherAposta();
 
     public char escolherJogo() {
         return 0;
