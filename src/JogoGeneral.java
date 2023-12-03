@@ -70,16 +70,16 @@ public class JogoGeneral extends JogoDados implements Serializable {
             }
             else{
                 System.out.println("Você perdeu!!! Seu novo saldo : " + saldo);
-                return 0;//perdeu
+                return getSaldo();//perdeu
             }
         }       
         else{//maquina
             for (int i = 0; i < 13; i++) {
                 
                 super.rolarDados();
-                System.out.println("Dados:");
+                System.out.print("Dados:");
                 for (int j = 0; j < 5; j++) {
-                    System.out.print(super.getDado(j).getSideUp() + " ");
+                    System.out.println(super.getDado(j).getSideUp() + " ");
                 }
 
                 jogadas[i] = executarRegrasJogoG(i+1);
@@ -88,15 +88,14 @@ public class JogoGeneral extends JogoDados implements Serializable {
             for (int i = 0; i < 12; i++) {
                 total += jogadas[i];
             }
-            float saldo = getSaldo();
             if(total > (jogadas[12]*2)){
-                saldo += valorAposta;
-                System.out.println("Você ganhou!!! Seu novo saldo : " + saldo);
-                return (valorAposta*2);
+                super.setSaldo(super.getSaldo() + valorAposta*2);
+                System.out.println("Você ganhou!!! ");
+                return getSaldo();
             }
             else{
-                System.out.println("Você perdeu!!! Seu novo saldo : " + saldo);
-                return 0;
+                System.out.println("Você perdeu!!! ");
+                return getSaldo();
             }  
         }
         
