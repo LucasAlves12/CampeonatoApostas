@@ -44,7 +44,7 @@ public class JogoAzar extends JogoDados {
 
     //metodo para mostrar o extrato do jogo azar
     public void extrato(){
-        System.out.println("Jogo: Jogo azar");
+        System.out.println("\nJogo: Jogo azar");
         System.out.println("Valor da aposta: " + valorAposta);
         System.out.println("Resultado ultima jogada de dados: " + getDados()[0].getSideUp() + " + "
                     + getDados()[1].getSideUp() + " = " + (getDados()[0].getSideUp() + getDados()[1].getSideUp()) );

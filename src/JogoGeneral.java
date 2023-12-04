@@ -200,7 +200,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
 
     // metodo para mostrar o extrato do jogo general
     public void extrato() {
-        System.out.println("Jogo: Jogo general");
+        System.out.println("\nJogo: Jogo general");
         for (int k = 0; k < 13; k++) {
             System.out.print(jogadas[k] + "\t");
         }

@@ -6,9 +6,9 @@ public class usaCampeonato {
         char opcao;
         Campeonato c = new Campeonato();
         do {
-            System.out.println("..:: Menu interativo ::..");
+            System.out.println("\n..:: Menu interativo ::..");
             System.out.println("a - Incluir jogador");
-            System.out.println("ba - Remover jogador");
+            System.out.println("b - Remover jogador");
             System.out.println("c - Executar rodada de apostas");
             System.out.println("d - Imprimir saldo dos jogadores");
             System.out.println("e - Imprimir extrato dos resultados");
