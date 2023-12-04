@@ -178,6 +178,8 @@ public class Campeonato {
     public void extrato() {// Analisar este código
         int opcaoJogador;
         int opcaoJogo;
+        String instanciaJogador;
+        String instanciaJogo;
         do{
         System.out.println("Imprimir extrato somente de humanos (1)");
         System.out.println("Imprimir extrato somente de maquinas (2)");
@@ -192,19 +194,33 @@ public class Campeonato {
             opcaoJogo = teclado.nextInt();
         }while(opcaoJogo < 1 || opcaoJogo > 3);
 
-        if(opcaoJogador == 1 && opcaoJogo == 1){
-            for(int j = 0; j < qtdJogadores; j++){
+        if(opcaoJogador == 1) instanciaJogador = "Humano";
+        else if(opcaoJogador == 2) instanciaJogador = "Maquina" ;
+
+        if(opcaoJogo == 1) instanciaJogo = "JogoAzar";
+        else if(opcaoJogo == 2) instanciaJogo = "JogoGeneral";
+        
+
+        if(opcaoJogador == 1 && opcaoJogo == 1)
+            for(int j = 0; j < qtdJogadores; j++)
                 if(jogadores[j] instanceof Humano){
                     System.out.println("Nome: " + jogadores[j].getNome());
-                    for(int i = 0; i < jogadores[j].getnJogos(); i++){
-                        if(jogadores[j].getJogo()[i] instanceof JogoAzar){
+                    for(int i = 0; i < jogadores[j].getnJogos(); i++)
+                        if(jogadores[j].getJogo()[i] instanceof JogoAzar)
                              jogadores[j].getJogo()[i].extrato();
-                            
-                        }
-                    }
                 }
-            }
-        }
+            
+                
+
+         
+
+            
+                            
+                        
+                    
+                
+            
+        
     }
 
     public void estatisticas() { // Analisar este código
