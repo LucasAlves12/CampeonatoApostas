@@ -106,52 +106,70 @@ public class Campeonato {
         // se não houver jogadores
         // suficientes
 
-        for (int rodada = 0; rodada < 10; rodada++) {
-            for (int i = 0; i < qtdJogadores; i++) {
+        for (int i = 0; i < qtdJogadores; i++) {
 
-                if (jogadores[i].getSaldo() <= 0) {
-                    System.out
-                            .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
-                    break;
+            if (jogadores[i].getSaldo() <= 0) {
+                System.out
+                        .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                break;
+            }
+
+            if (jogadores[i].getnJogos() == 10) {
+                System.out.println("O jogador " + jogadores[i].getNome() + " já jogou 10 vezes, este é o limite");
+                break;
+            }
+
+            if (jogadores[i] instanceof Humano) {// humano
+
+                System.out.println("Jogador: " + jogadores[i].getNome());
+
+                valorAposta = jogadores[i].escolherAposta();
+                opcao = jogadores[i].escolherJogo();
+
+                if (opcao == 'G') {
+                    jogadores[i].jogarGeneral(jogadores[i].getnJogos(), valorAposta);
                 }
 
-                if(jogadores[i].getnJogos() == 10) {
-                    System.out.println("O jogador " + jogadores[i].getNome() + " já jogou 10 vezes, este é o limite");
-                    break;
-                }
-
-                if (jogadores[i] instanceof Humano) {// humano
-
-                    System.out.println("Jogador: " + jogadores[i].getNome());
-
-                    valorAposta = jogadores[i].escolherAposta();
-                    opcao = jogadores[i].escolherJogo();
-
-                    if (opcao == 'G') {
-                        jogadores[i].jogarGeneral(rodada, valorAposta);
-                    }
-
-                    else if (opcao == 'A') {
-                        jogadores[i].jogarAzar(rodada, valorAposta);
-
-                    }
-
-                } else if (jogadores[i] instanceof Maquina) {// maquina
-
-                    System.out.println("Jogador: " + jogadores[i].getNome());
-
-                    valorAposta = jogadores[i].escolherAposta();
-                    int opcaoMaquina = (int) Math.floor((Math.random() * 2));
-
-                    if (opcaoMaquina == 0)
-                        jogadores[i].jogarGeneral(rodada, valorAposta);
-                    else
-                        jogadores[i].jogarAzar(rodada, valorAposta);
+                else if (opcao == 'A') {
+                    jogadores[i].jogarAzar(jogadores[i].getnJogos(), valorAposta);
 
                 }
+
+            } else if (jogadores[i] instanceof Maquina) {// maquina
+
+                System.out.println("Jogador: " + jogadores[i].getNome());
+
+                valorAposta = jogadores[i].escolherAposta();
+                int opcaoMaquina = jogadores[i].ApostaMaquina();
+
+                if (opcaoMaquina == 0)
+                    jogadores[i].jogarGeneral(jogadores[i].getnJogos(), valorAposta);
+                else
+                    jogadores[i].jogarAzar(jogadores[i].getnJogos(), valorAposta);
+
             }
         }
 
+    }
+
+    private boolean temJogadoresmaquinas() {
+
+        for (int i = 0; i < qtdJogadores; i++) {
+            if (jogadores[i] instanceof Maquina) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean temJogadoresHumanos() {
+
+        for (int i = 0; i < qtdJogadores; i++) {
+            if (jogadores[i] instanceof Humano) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // imprime o saldo dos jogadores
@@ -168,6 +186,12 @@ public class Campeonato {
 
         switch (opcao) {
             case 1:
+
+                if (temJogadoresHumanos() == false) {
+                    System.out.println("Não há jogadores humanos cadastrados");
+                    break;
+                }
+
                 for (int i = 0; i < qtdJogadores; i++) {
                     if (jogadores[i] instanceof Humano) {
                         System.out.println("Nome: " + jogadores[i].getNome() + " Saldo: " + jogadores[i].getSaldo());
@@ -176,6 +200,12 @@ public class Campeonato {
                 break;
 
             case 2:
+
+                if (temJogadoresmaquinas() == false) {
+                    System.out.println("Não há jogadores maquinas cadastrados");
+                    break;
+                }
+
                 for (int i = 0; i < qtdJogadores; i++) {
                     if (jogadores[i] instanceof Maquina) {
                         System.out.println("Nome: " + jogadores[i].getNome() + " Saldo: " + jogadores[i].getSaldo());
@@ -213,7 +243,7 @@ public class Campeonato {
             opcaoJogo = teclado.nextInt();
         } while (opcaoJogo < 1 || opcaoJogo > 3);
 
-        if (opcaoJogador == 1 && opcaoJogo == 1)
+        if (opcaoJogador == 1 && opcaoJogo == 1){
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -221,7 +251,12 @@ public class Campeonato {
                         if (jogadores[j].getJogo()[i] instanceof JogoAzar)
                             jogadores[j].getJogo()[i].extrato();
                 }
-        if (opcaoJogador == 1 && opcaoJogo == 2)
+
+            if (temJogadoresHumanos() == false) 
+                {System.out.println("Não há jogadores humanos cadastrados");}
+                
+            }
+        if (opcaoJogador == 1 && opcaoJogo == 2){
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -229,15 +264,21 @@ public class Campeonato {
                         if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                             jogadores[j].getJogo()[i].extrato();
                 }
-        if (opcaoJogador == 1 && opcaoJogo == 3)
+            if (temJogadoresHumanos() == false) 
+                {System.out.println("Não há jogadores humanos cadastrados");}
+        }
+        if (opcaoJogador == 1 && opcaoJogo == 3){
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         jogadores[j].getJogo()[i].extrato();
                 }
+            if (temJogadoresHumanos() == false) 
+                {System.out.println("Não há jogadores humanos cadastrados");}
+            }
 
-        if (opcaoJogador == 2 && opcaoJogo == 1)
+        if (opcaoJogador == 2 && opcaoJogo == 1){
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -245,8 +286,11 @@ public class Campeonato {
                         if (jogadores[j].getJogo()[i] instanceof JogoAzar)
                             jogadores[j].getJogo()[i].extrato();
                 }
+            if (temJogadoresmaquinas() == false) 
+                {System.out.println("Não há jogadores maquinas cadastrados");}
+            }
 
-        if (opcaoJogador == 2 && opcaoJogo == 2)
+        if (opcaoJogador == 2 && opcaoJogo == 2){
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -254,8 +298,11 @@ public class Campeonato {
                         if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                             jogadores[j].getJogo()[i].extrato();
                 }
+                if (temJogadoresmaquinas() == false) 
+                    {System.out.println("Não há jogadores maquinas cadastrados");}
+            }
 
-        if (opcaoJogador == 2 && opcaoJogo == 3)
+        if (opcaoJogador == 2 && opcaoJogo == 3){
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -263,7 +310,11 @@ public class Campeonato {
                         jogadores[j].getJogo()[i].extrato();
                 }
 
-        if (opcaoJogador == 3 && opcaoJogo == 1)
+            if (temJogadoresmaquinas() == false) 
+                    {System.out.println("Não há jogadores maquinas cadastrados");}
+            }
+
+        if (opcaoJogador == 3 && opcaoJogo == 1){
             for (int j = 0; j < qtdJogadores; j++) {
                 System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++)
@@ -271,21 +322,31 @@ public class Campeonato {
                         jogadores[j].getJogo()[i].extrato();
             }
 
-        if (opcaoJogador == 3 && opcaoJogo == 2)
+            if(qtdJogadores == 0)
+                System.out.println("Não há jogadores cadastrados");
+        }
+
+        if (opcaoJogador == 3 && opcaoJogo == 2){
             for (int j = 0; j < qtdJogadores; j++) {
                 System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++)
                     if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                         jogadores[j].getJogo()[i].extrato();
             }
+            if(qtdJogadores == 0)
+                System.out.println("Não há jogadores cadastrados");
+        }
 
-        if (opcaoJogador == 3 && opcaoJogo == 3)
+        if (opcaoJogador == 3 && opcaoJogo == 3){
             for (int j = 0; j < qtdJogadores; j++) {
                 System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++) {
                     jogadores[j].getJogo()[i].extrato();
                 }
             }
+            if(qtdJogadores == 0)
+                System.out.println("Não há jogadores cadastrados");
+        }
 
     }
 
@@ -427,25 +488,24 @@ public class Campeonato {
                 }
 
             case 4:
-                
+
                 for (int i = 0; i < qtdJogadores; i++) {
 
                     for (int j = 0; j < jogadores[i].getnJogos(); j++) {
-                    
-                            for (int k = 0; k < 6; k++) {
-                                Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
-                                Estatistica[k] += Estatisticaaux;
-                            }
-                        
+
+                        for (int k = 0; k < 6; k++) {
+                            Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                            Estatistica[k] += Estatisticaaux;
+                        }
+
                     }
                 }
 
                 for (int i = 0; i < 6; i++) {
                     System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
                 }
-            
-            break;
 
+                break;
 
             default:
                 break;

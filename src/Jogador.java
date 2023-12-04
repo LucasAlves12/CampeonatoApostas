@@ -78,6 +78,10 @@ public abstract class Jogador implements Serializable {
         return 0;
     }
 
+    public int ApostaMaquina() {
+        return 0;
+    }
+
     //metodo que executa o jogo general e atualiza o saldo conforme o resultado
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
 

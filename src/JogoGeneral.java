@@ -16,7 +16,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
         for (int i = 0; i < 13; i++) {
             jogadas[i] = -1;
         }
-        estats = new int[6];
+        estats = new int[numFaces];
         for (int i = 0; i < 6; i++) {
             estats[i] = 0;
         }

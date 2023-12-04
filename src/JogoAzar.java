@@ -7,7 +7,7 @@ public class JogoAzar extends JogoDados {
     public JogoAzar(float valorAposta, float saldo) {
         super(2, "Jogo do Azar", saldo);
         this.valorAposta = valorAposta;
-        estats = new int[6];
+        estats = new int[numFaces];
         for (int i = 0; i < 6; i++) {
             estats[i] = 0;
         }

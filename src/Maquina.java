@@ -4,6 +4,10 @@ public class Maquina extends Jogador implements JogarComoMaquina{
         super(nome);
     }
 
+    public int ApostaMaquina() {
+        return (int)Math.floor((Math.random() * 2));
+    }
+
     //escolhe o valor a ser apostado
     public float escolherAposta() {
         float valorAposta=0;
