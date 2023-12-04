@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public abstract class JogoDados implements Estatistica {
+public abstract class JogoDados implements Estatistica,Serializable{
     
     private int nDados;
     private String nomeJogo;
@@ -66,7 +67,8 @@ public abstract class JogoDados implements Estatistica {
 
     public abstract boolean jogarJogos(char tipoJog);
     public abstract void extrato();
-    
+    public abstract void salvarEstatisticas(int a);
+    public abstract int getEstatisticas(int i);
    
         
     

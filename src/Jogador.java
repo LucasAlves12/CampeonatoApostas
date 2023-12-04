@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public abstract class Jogador {
+public abstract class Jogador implements Serializable {
 
     private String nome;
     private JogoDados[] jogo;
@@ -11,6 +12,9 @@ public abstract class Jogador {
         jogo = new JogoDados[10];
         nJogos = 0;
         saldo = 100;
+    }
+    public Jogador() {
+        jogo = new JogoDados[10];  
     }
 
     abstract void jogarGeneral(int rodada, float valorAposta);
@@ -67,17 +71,23 @@ public abstract class Jogador {
     }
 
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
-        
+
+        nJogos++;
         jogo[rodada] = new JogoGeneral(valorAposta,saldo);
         boolean s = jogo[rodada].jogarJogos(tipoJogador);
+
         if(s) setSaldo(saldo + valorAposta*2);
         System.out.println("Saldo: " + (saldo));
     }
 
     public void execAzar(int rodada, float valorAposta, char tipoJogador){
+        nJogos++;
         jogo[rodada] = new JogoAzar(valorAposta,saldo);
         boolean s = jogo[rodada].jogarJogos(tipoJogador);
         if(s) setSaldo(saldo + valorAposta*2);
         System.out.println("Saldo: " + (saldo));
+    }
+    public void zerarNumJogos() {
+        nJogos = 0;
     }
 }

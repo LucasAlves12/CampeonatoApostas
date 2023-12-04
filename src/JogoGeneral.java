@@ -6,6 +6,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
     private int[] jogadas;
     private float valorAposta;
     private boolean resultado;
+    private int[] estats;
 
     public JogoGeneral(float valorAposta, float saldo) {
 
@@ -14,6 +15,10 @@ public class JogoGeneral extends JogoDados implements Serializable {
         this.jogadas = new int[13];
         for (int i = 0; i < 13; i++) {
             jogadas[i] = -1;
+        }
+        estats = new int[6];
+        for (int i = 0; i < 6; i++) {
+            estats[i] = 0;
         }
 
     }
@@ -28,12 +33,15 @@ public class JogoGeneral extends JogoDados implements Serializable {
         int aux = 0;
         if (tipoJogador == 'H' || tipoJogador == 'h') {
             for (int i = 0; i < 13; i++) {
+                System.out.println("Rodada " + (i + 1) + ": ");
                 int escolha = 0;
-                super.rolarDados();
-                System.out.print("Dados: ");
+                rolarDados();
+                System.out.println("Dados:");
                 for (int j = 0; j < 5; j++) {
-                    System.out.print(super.getDado(j).getSideUp() + "-");
+                    System.out.printf(getDado(j).getSideUp() + " ");
+                    salvarEstatisticas(getDado(j).getSideUp());
                 }
+                System.out.println("Rodada " + (i + 1) + ": ");
                 System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
                 for (int k = 0; k < 13; k++) {
                     aux = jogadas[k];
@@ -43,7 +51,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
                         System.out.print(aux + "\t");
                 }
                 do {
-                    System.out.println("\nEscolha uma jogada (1-13): ");
+                    System.out.println("\nEscolha uma jogada valida(1-13): ");
                     escolha = sc.nextInt();
                 } while (escolha < 1 || escolha > 13 || jogadas[escolha - 1] != -1);
 
@@ -60,15 +68,25 @@ public class JogoGeneral extends JogoDados implements Serializable {
         } else {// maquina
             for (int i = 0; i < 13; i++) {
 
-                super.rolarDados();
-                System.out.print("Dados: ");
+                rolarDados();
+                System.out.print("Dados:");
                 for (int j = 0; j < 5; j++) {
-                    System.out.print(super.getDado(j).getSideUp() + "-");
+                    System.out.print(getDado(j).getSideUp() + " ");
+                    salvarEstatisticas(getDado(j).getSideUp());
                 }
-                
+
+                System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
+                for (int k = 0; k < 13; k++) {
+                    aux = jogadas[k];
+                    if (aux == -1)
+                        System.out.print("- \t");
+                    else
+                        System.out.print(aux + "\t");
+                }
+                System.out.println("escolha maquina: "+ (i+1));
+
+
                 jogadas[i] = executarRegrasJogoG(i + 1);
-                System.out.println("\nJogada escolhida: " + (i + 1) + "\n");
-                //System.out.println();
             }
         }
 
@@ -179,7 +197,8 @@ public class JogoGeneral extends JogoDados implements Serializable {
     public void extrato() {
         System.out.println("Jogo: Jogo general");
         System.out.println("Valor da aposta: " + valorAposta);
-        System.out.println("Resultado: " + resultado);
+        if(resultado) System.out.println("Resultado: Ganhou" );
+        else System.out.println("Resultado: Perdeu" );   
     }
 
     public String toString() {
@@ -189,5 +208,13 @@ public class JogoGeneral extends JogoDados implements Serializable {
         }
         return s;
     }
+
+    public void salvarEstatisticas(int a) {
+        for(int i = 0; i < 6; i++){
+            if(a == i+1) estats[i]++;
+        }
+    }
+    @Override
+    public int getEstatisticas(int i) {return estats[i];}
 
 }

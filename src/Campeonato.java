@@ -16,7 +16,6 @@ public class Campeonato {
         jogadores = new Jogador[10];
         qtdJogadores = 0;
         maxJogadores = 10;
-
     }
 
     public void incluirJogador() {
@@ -24,6 +23,13 @@ public class Campeonato {
 
         System.out.println("Insira seu nome: ");
         String nome = teclado.nextLine();
+        for (int i = 0; i < qtdJogadores; i++) {
+            if (jogadores[i].getNome().equals(nome)) {
+                System.out.println("Jogador já cadastrado");
+                return;
+            }
+        }
+
         do {
             System.out.println("Tipo de jogador (H - humano ou M - maquina):");
             p = teclado.nextLine().toUpperCase().charAt(0);
@@ -45,9 +51,11 @@ public class Campeonato {
                 jogadores[qtdJogadores] = new Humano(nome, cpf, agencia, conta, numeroBanco);
                 qtdJogadores++;
                 cpf = teclado.nextLine();
+                System.out.println("Jogador inserido com sucesso!\n");
             } else {
                 jogadores[qtdJogadores] = new Maquina(nome);
                 qtdJogadores++;
+                System.out.println("Jogador inserido com sucesso!\n");
             }
         } else {
             System.out.println("Não é possivel inserir mais jogadores !!!");
@@ -87,7 +95,6 @@ public class Campeonato {
     public void iniciarCampeonato() {
         Float valorAposta;
         char opcao = ' ';
-        boolean s = false;
 
         if (qtdJogadores == 0) {
             System.out.println("Não há jogadores suficientes para iniciar o campeonato");
@@ -100,7 +107,13 @@ public class Campeonato {
             for (int i = 0; i < qtdJogadores; i++) {
 
                 if (jogadores[i].getSaldo() <= 0) {
-                    System.out.println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                    System.out
+                            .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                    break;
+                }
+
+                if(jogadores[i].getnJogos() == 10) {
+                    System.out.println("O jogador " + jogadores[i].getNome() + " já jogou 10 vezes, este é o limite");
                     break;
                 }
 
@@ -112,11 +125,11 @@ public class Campeonato {
                     opcao = jogadores[i].escolherJogo();
 
                     if (opcao == 'G') {
-                        jogadores[i].jogarGeneral(rodada,valorAposta);
+                        jogadores[i].jogarGeneral(rodada, valorAposta);
                     }
 
                     else if (opcao == 'A') {
-                        jogadores[i].jogarAzar(rodada,valorAposta);
+                        jogadores[i].jogarAzar(rodada, valorAposta);
 
                     }
 
@@ -127,9 +140,11 @@ public class Campeonato {
                     valorAposta = jogadores[i].escolherAposta();
                     int opcaoMaquina = (int) Math.floor((Math.random() * 2));
 
-                    if (opcaoMaquina == 0) jogadores[i].jogarGeneral(rodada, valorAposta); 
-                    else jogadores[i].jogarAzar(rodada, valorAposta);
-                        
+                    if (opcaoMaquina == 0)
+                        jogadores[i].jogarGeneral(rodada, valorAposta);
+                    else
+                        jogadores[i].jogarAzar(rodada, valorAposta);
+
                 }
             }
         }
@@ -137,101 +152,299 @@ public class Campeonato {
     }
 
     public void imprimirSaldo() {
-        
+
         int opcao;
 
-        do{
-        System.out.println("Imprimir saldo somente de humanos (1)");
-        System.out.println("Imprimir saldo somente de maquinas (2)");
-        System.out.println("Imprimir saldo de todos (3)");
-        opcao = teclado.nextInt();
-        }while(opcao < 1 || opcao > 3);
+        do {
+            System.out.println("Imprimir saldo somente de humanos (1)");
+            System.out.println("Imprimir saldo somente de maquinas (2)");
+            System.out.println("Imprimir saldo de todos (3)");
+            opcao = teclado.nextInt();
+        } while (opcao < 1 || opcao > 3);
 
-        switch(opcao){
+        switch (opcao) {
             case 1:
-                for(int i = 0; i < qtdJogadores; i++){
-                    if(jogadores[i] instanceof Humano){
+                for (int i = 0; i < qtdJogadores; i++) {
+                    if (jogadores[i] instanceof Humano) {
                         System.out.println("Nome: " + jogadores[i].getNome() + " Saldo: " + jogadores[i].getSaldo());
                     }
                 }
                 break;
 
             case 2:
-                for(int i = 0; i < qtdJogadores; i++){
-                    if(jogadores[i] instanceof Maquina){
+                for (int i = 0; i < qtdJogadores; i++) {
+                    if (jogadores[i] instanceof Maquina) {
                         System.out.println("Nome: " + jogadores[i].getNome() + " Saldo: " + jogadores[i].getSaldo());
                     }
                 }
                 break;
 
             case 3:
-                if(qtdJogadores == 0) System.out.println("Não há jogadores cadastrados");
-                for(int i = 0; i < qtdJogadores; i++){
+                if (qtdJogadores == 0)
+                    System.out.println("Não há jogadores cadastrados");
+                for (int i = 0; i < qtdJogadores; i++) {
                     System.out.println("Nome: " + jogadores[i].getNome() + " Saldo: " + jogadores[i].getSaldo());
                 }
                 break;
         }
-
 
     }
 
     public void extrato() {// Analisar este código
         int opcaoJogador;
         int opcaoJogo;
-        String instanciaJogador;
-        String instanciaJogo;
-        do{
-        System.out.println("Imprimir extrato somente de humanos (1)");
-        System.out.println("Imprimir extrato somente de maquinas (2)");
-        System.out.println("Imprimir extrato de todos (3)");
-        opcaoJogador = teclado.nextInt();
-        }while(opcaoJogador < 1 || opcaoJogador > 3);
 
-        do{
+        do {
+            System.out.println("Imprimir extrato somente de humanos (1)");
+            System.out.println("Imprimir extrato somente de maquinas (2)");
+            System.out.println("Imprimir extrato de todos (3)");
+            opcaoJogador = teclado.nextInt();
+        } while (opcaoJogador < 1 || opcaoJogador > 3);
+
+        do {
             System.out.println("Imprimir extrato de jogo do azar (1)");
             System.out.println("Imprimir extrato de jogo general (2)");
             System.out.println("Imprimir extrato de todos (3)");
             opcaoJogo = teclado.nextInt();
-        }while(opcaoJogo < 1 || opcaoJogo > 3);
+        } while (opcaoJogo < 1 || opcaoJogo > 3);
 
-        if(opcaoJogador == 1) instanciaJogador = "Humano";
-        else if(opcaoJogador == 2) instanciaJogador = "Maquina" ;
-
-        if(opcaoJogo == 1) instanciaJogo = "JogoAzar";
-        else if(opcaoJogo == 2) instanciaJogo = "JogoGeneral";
-        
-
-        if(opcaoJogador == 1 && opcaoJogo == 1)
-            for(int j = 0; j < qtdJogadores; j++)
-                if(jogadores[j] instanceof Humano){
+        if (opcaoJogador == 1 && opcaoJogo == 1)
+            for (int j = 0; j < qtdJogadores; j++)
+                if (jogadores[j] instanceof Humano) {
                     System.out.println("Nome: " + jogadores[j].getNome());
-                    for(int i = 0; i < jogadores[j].getnJogos(); i++)
-                        if(jogadores[j].getJogo()[i] instanceof JogoAzar)
-                             jogadores[j].getJogo()[i].extrato();
+                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                        if (jogadores[j].getJogo()[i] instanceof JogoAzar)
+                            jogadores[j].getJogo()[i].extrato();
                 }
-            
-                
+        if (opcaoJogador == 1 && opcaoJogo == 2)
+            for (int j = 0; j < qtdJogadores; j++)
+                if (jogadores[j] instanceof Humano) {
+                    System.out.println("Nome: " + jogadores[j].getNome());
+                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                        if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
+                            jogadores[j].getJogo()[i].extrato();
+                }
+        if (opcaoJogador == 1 && opcaoJogo == 3)
+            for (int j = 0; j < qtdJogadores; j++)
+                if (jogadores[j] instanceof Humano) {
+                    System.out.println("Nome: " + jogadores[j].getNome());
+                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                        jogadores[j].getJogo()[i].extrato();
+                }
 
-         
+        if (opcaoJogador == 2 && opcaoJogo == 1)
+            for (int j = 0; j < qtdJogadores; j++)
+                if (jogadores[j] instanceof Maquina) {
+                    System.out.println("Nome: " + jogadores[j].getNome());
+                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                        if (jogadores[j].getJogo()[i] instanceof JogoAzar)
+                            jogadores[j].getJogo()[i].extrato();
+                }
 
-            
-                            
-                        
-                    
-                
-            
-        
+        if (opcaoJogador == 2 && opcaoJogo == 2)
+            for (int j = 0; j < qtdJogadores; j++)
+                if (jogadores[j] instanceof Maquina) {
+                    System.out.println("Nome: " + jogadores[j].getNome());
+                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                        if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
+                            jogadores[j].getJogo()[i].extrato();
+                }
+
+        if (opcaoJogador == 2 && opcaoJogo == 3)
+            for (int j = 0; j < qtdJogadores; j++)
+                if (jogadores[j] instanceof Maquina) {
+                    System.out.println("Nome: " + jogadores[j].getNome());
+                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                        jogadores[j].getJogo()[i].extrato();
+                }
+
+        if (opcaoJogador == 3 && opcaoJogo == 1)
+            for (int j = 0; j < qtdJogadores; j++) {
+                System.out.println("Nome: " + jogadores[j].getNome());
+                for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                    if (jogadores[j].getJogo()[i] instanceof JogoAzar)
+                        jogadores[j].getJogo()[i].extrato();
+            }
+
+        if (opcaoJogador == 3 && opcaoJogo == 2)
+            for (int j = 0; j < qtdJogadores; j++) {
+                System.out.println("Nome: " + jogadores[j].getNome());
+                for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                    if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
+                        jogadores[j].getJogo()[i].extrato();
+            }
+
+        if (opcaoJogador == 3 && opcaoJogo == 3)
+            for (int j = 0; j < qtdJogadores; j++) {
+                System.out.println("Nome: " + jogadores[j].getNome());
+                for (int i = 0; i < jogadores[j].getnJogos(); i++) {
+                    jogadores[j].getJogo()[i].extrato();
+                }
+            }
+
     }
 
-    public void estatisticas() { // Analisar este código
-        int i;
-        System.out.println("----- Estatisticas -----\n");
-        System.out.printf("%s", "\t");
+    public void estatisticas() {
+        int opcao1;
+        int[] Estatistica = new int[6];
+        int Estatisticaaux;
 
-        for (i = 0; i < qtdJogadores; i++)
-            System.out.printf("%s", "\t" + jogadores[i].getNome() + "(" + jogadores[i].getTipoJogador() + ")\t");
-        System.out.println();
-    } 
+        for (int i = 0; i < 5; i++) {
+            Estatistica[i] = 0;
+        }
+
+        do {
+            // Solicitar qual estatistica mostrar
+            System.out.println("Escolha pelo numero qual tipo de estatisticas voce deseja ver:");
+            System.out.println("1  Por tipo de jogador");
+            System.out.println("2  Por tipo de jogo escolhido por jogador");
+            System.out.println("3  total por jogos General ou azar");
+            System.out.println("4  Total do Campeonato");
+
+            opcao1 = teclado.nextInt();
+        } while (opcao1 < 1 || opcao1 > 4);
+
+        switch (opcao1) {
+            case 1:
+
+                do {
+                    System.out.println("1 - Humano");
+                    System.out.println("2 - Maquina");
+                    opcao1 = teclado.nextInt();
+
+                } while (opcao1 < 1 || opcao1 > 2);
+
+                if (opcao1 == 1) {
+                    for (int i = 0; i < qtdJogadores; i++) {
+                        if (jogadores[i] instanceof Humano) {
+                            System.out.println("Estatisticas do jogador " + jogadores[i].getNome());
+                            for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
+                            }
+                        }
+                    }
+
+                } else if (opcao1 == 2) {
+                    for (int i = 0; i < qtdJogadores; i++) {
+                        if (jogadores[i] instanceof Maquina) {
+                            for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 6; i++) {
+                    System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
+                }
+
+                break;
+
+            case 2:
+
+                do {
+                    System.out.println("1 - jogo de Azar");
+                    System.out.println("2 - jogo General");
+                    opcao1 = teclado.nextInt();
+
+                } while (opcao1 < 1 || opcao1 > 2);
+
+                System.out.println("----- Jogadores -----");
+                for (int i = 0; i < qtdJogadores; i++) {
+                    System.out.println(jogadores[i].getNome() + "\t");
+                }
+
+                System.out.println("Informe o nome do jogador:");
+                teclado.nextLine();
+                String nomeAux = teclado.nextLine();
+
+                for (int i = 0; i < qtdJogadores; i++) {
+                    if (jogadores[i].getNome().equals(nomeAux)) {
+                        System.out.println("Estatisticas do jogador " + jogadores[i].getNome() + " neste jogo");
+                        for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                            if (opcao1 == 1 && jogadores[i].getJogo()[j] instanceof JogoAzar) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
+                            } else if (opcao1 == 2 && jogadores[i].getJogo()[j] instanceof JogoGeneral) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 6; i++) {
+                    System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
+                }
+
+                break;
+
+            case 3:
+
+                do {
+                    System.out.println("1 - jogo de Azar");
+                    System.out.println("2 - jogo General");
+                    opcao1 = teclado.nextInt();
+
+                } while (opcao1 < 1 || opcao1 > 2);
+
+                for (int i = 0; i < qtdJogadores; i++) {
+
+                    for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                        if (opcao1 == 1 && jogadores[i].getJogo()[j] instanceof JogoAzar) {
+                            for (int k = 0; k < 6; k++) {
+                                Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                Estatistica[k] += Estatisticaaux;
+                            }
+                        } else if (opcao1 == 2 && jogadores[i].getJogo()[j] instanceof JogoGeneral) {
+                            for (int k = 0; k < 6; k++) {
+                                Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                Estatistica[k] += Estatisticaaux;
+                            }
+                        }
+                    }
+
+                }
+
+                for (int i = 0; i < 6; i++) {
+                    System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
+                }
+
+            case 4:
+                
+                for (int i = 0; i < qtdJogadores; i++) {
+
+                    for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                    
+                            for (int k = 0; k < 6; k++) {
+                                Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                Estatistica[k] += Estatisticaaux;
+                            }
+                        
+                    }
+                }
+
+                for (int i = 0; i < 6; i++) {
+                    System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
+                }
+            
+            break;
+
+
+            default:
+                break;
+        }
+    }
 
     // grava em arquivo .dat a rodada executada
     public void gravarEmArquivo() {
