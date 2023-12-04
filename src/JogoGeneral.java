@@ -96,8 +96,10 @@ public class JogoGeneral extends JogoDados implements Serializable {
         for (int i = 0; i < 12; i++) {
             total += jogadas[i];
         }
+        System.out.println("Total de pontos de 1 a 12: " + total);
+        System.out.println("Total de pontos de 13*2: " + jogadas[12] * 2);
         if (total > (jogadas[12] * 2)) {
-            super.setSaldo(super.getSaldo() + valorAposta * 2);
+            setSaldo(super.getSaldo() + valorAposta * 2);
             System.out.println("Você ganhou!!! ");resultado = true;
             return true;
         } else {
@@ -199,7 +201,10 @@ public class JogoGeneral extends JogoDados implements Serializable {
     // metodo para mostrar o extrato do jogo general
     public void extrato() {
         System.out.println("Jogo: Jogo general");
-        System.out.println("Valor da aposta: " + valorAposta);
+        for (int k = 0; k < 13; k++) {
+            System.out.print(jogadas[k] + "\t");
+        }
+        System.out.println("\nValor da aposta: " + valorAposta);
         if(resultado) System.out.println("Resultado: Ganhou" );
         else System.out.println("Resultado: Perdeu" );   
     }
