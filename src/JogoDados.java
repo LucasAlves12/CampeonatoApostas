@@ -66,7 +66,8 @@ public abstract class JogoDados implements Estatistica {
 
     public abstract boolean jogarJogos(char tipoJog);
     public abstract void extrato();
-    
+    public abstract void salvarEstatisticas(int a);
+    public abstract int[] getEstatisticas();
    
         
     

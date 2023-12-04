@@ -41,7 +41,7 @@ public class usaCampeonato {
                     break;
 
                 case 'f':
-                    c.estatisticas();
+                    c.estatisticas();   
                     break;
                 case 'g':
                     c.gravarEmArquivo();
