@@ -35,7 +35,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
         int aux = 0;
         if (tipoJogador == 'H' || tipoJogador == 'h') {
             for (int i = 0; i < 13; i++) {
-                System.out.println("Rodada " + (i + 1) + ": ");
+                System.out.println("\nRodada " + (i + 1) + ": ");
                 int escolha = 0;
                 rolarDados();
                 System.out.println("Dados:");
@@ -44,7 +44,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
                     salvarEstatisticas(getDado(j).getSideUp());
                 }
                 System.out.println("Rodada " + (i + 1) + ": ");
-                System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
+                System.out.println("\n1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
                 for (int k = 0; k < 13; k++) {
                     aux = jogadas[k];
                     if (aux == -1)
@@ -71,13 +71,13 @@ public class JogoGeneral extends JogoDados implements Serializable {
             for (int i = 0; i < 13; i++) {
 
                 rolarDados();
-                System.out.print("Dados:");
+                System.out.print("\nDados:");
                 for (int j = 0; j < 5; j++) {
                     System.out.print(getDado(j).getSideUp() + " ");
                     salvarEstatisticas(getDado(j).getSideUp());
                 }
 
-                System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
+                System.out.println("\n1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
                 for (int k = 0; k < 13; k++) {
                     aux = jogadas[k];
                     if (aux == -1)
@@ -85,7 +85,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
                     else
                         System.out.print(aux + "\t");
                 }
-                System.out.println("escolha maquina: "+ (i+1));
+                System.out.println("\nescolha maquina: "+ (i+1));
 
 
                 jogadas[i] = executarRegrasJogoG(i + 1);
@@ -97,7 +97,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
         for (int i = 0; i < 12; i++) {
             total += jogadas[i];
         }
-        System.out.println("Total de pontos de 1 a 12: " + total);
+        System.out.println("\nTotal de pontos de 1 a 12: " + total);
         System.out.println("Total de pontos de 13*2: " + jogadas[12] * 2);
         if (total > (jogadas[12] * 2)) {
             setSaldo(super.getSaldo() + valorAposta * 2);
