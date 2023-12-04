@@ -16,7 +16,6 @@ public class Campeonato {
         jogadores = new Jogador[10];
         qtdJogadores = 0;
         maxJogadores = 10;
-
     }
 
     public void incluirJogador() {
@@ -24,6 +23,13 @@ public class Campeonato {
 
         System.out.println("Insira seu nome: ");
         String nome = teclado.nextLine();
+        for (int i = 0; i < qtdJogadores; i++) {
+            if (jogadores[i].getNome().equals(nome)) {
+                System.out.println("Jogador já cadastrado");
+                return;
+            }
+        }
+
         do {
             System.out.println("Tipo de jogador (H - humano ou M - maquina):");
             p = teclado.nextLine().toUpperCase().charAt(0);
@@ -89,7 +95,6 @@ public class Campeonato {
     public void iniciarCampeonato() {
         Float valorAposta;
         char opcao = ' ';
-        boolean s = false;
 
         if (qtdJogadores == 0) {
             System.out.println("Não há jogadores suficientes para iniciar o campeonato");
@@ -104,6 +109,11 @@ public class Campeonato {
                 if (jogadores[i].getSaldo() <= 0) {
                     System.out
                             .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
+                    break;
+                }
+
+                if(jogadores[i].getnJogos() == 10) {
+                    System.out.println("O jogador " + jogadores[i].getNome() + " já jogou 10 vezes, este é o limite");
                     break;
                 }
 
@@ -277,8 +287,7 @@ public class Campeonato {
     public void estatisticas() {
         int opcao1;
         int[] Estatistica = new int[6];
-        int[] Estatisticaaux = new int[6];
-        int[] Estatisticaaux2 = new int[6];
+        int Estatisticaaux;
 
         for (int i = 0; i < 5; i++) {
             Estatistica[i] = 0;
@@ -287,42 +296,150 @@ public class Campeonato {
         do {
             // Solicitar qual estatistica mostrar
             System.out.println("Escolha pelo numero qual tipo de estatisticas voce deseja ver:");
-            System.out.println("1  Por nome de Jogador");
-             System.out.println("1  Por jogos escolhidos por cada jogador");
-            System.out.println("2 -> total por jogos");
-            System.out.println("4 -> Total do Campeonato");
+            System.out.println("1  Por tipo de jogador");
+            System.out.println("2  Por tipo de jogo escolhido por jogador");
+            System.out.println("3  total por jogos General ou azar");
+            System.out.println("4  Total do Campeonato");
 
             opcao1 = teclado.nextInt();
         } while (opcao1 < 1 || opcao1 > 4);
 
         switch (opcao1) {
             case 1:
-                
-                System.out.println("----- Jogadores -----");
-                for (int i = 0; i < qtdJogadores; i++) {
-                    System.out.println(jogadores[i].getNome() + "\t");
-                }
 
-                System.out.println("Informe o nome da pessoa que deseja acessar as estatisticas:");
-                String nomeAux = teclado.nextLine();
+                do {
+                    System.out.println("1 - Humano");
+                    System.out.println("2 - Maquina");
+                    opcao1 = teclado.nextInt();
 
-                for (int i = 0; i < qtdJogadores; i++) {
-                    if (jogadores[i].getNome().equals(nomeAux)) {
-                        for (int j = 0; j < jogadores[i].getnJogos(); j++) {
-                            Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas();
-                            for (int k = 0; k < 6; k++) {
-                                if(Estatisticaaux[k] > 0 )
-                                    Estatistica[k] += Estatisticaaux[k];
+                } while (opcao1 < 1 || opcao1 > 2);
+
+                if (opcao1 == 1) {
+                    for (int i = 0; i < qtdJogadores; i++) {
+                        if (jogadores[i] instanceof Humano) {
+                            System.out.println("Estatisticas do jogador " + jogadores[i].getNome());
+                            for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
+                            }
+                        }
+                    }
+
+                } else if (opcao1 == 2) {
+                    for (int i = 0; i < qtdJogadores; i++) {
+                        if (jogadores[i] instanceof Maquina) {
+                            for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
                             }
                         }
                     }
                 }
 
-                System.out.println("Estatisticas do jogador " + nomeAux);
                 for (int i = 0; i < 6; i++) {
                     System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
                 }
+
                 break;
+
+            case 2:
+
+                do {
+                    System.out.println("1 - jogo de Azar");
+                    System.out.println("2 - jogo General");
+                    opcao1 = teclado.nextInt();
+
+                } while (opcao1 < 1 || opcao1 > 2);
+
+                System.out.println("----- Jogadores -----");
+                for (int i = 0; i < qtdJogadores; i++) {
+                    System.out.println(jogadores[i].getNome() + "\t");
+                }
+
+                System.out.println("Informe o nome do jogador:");
+                teclado.nextLine();
+                String nomeAux = teclado.nextLine();
+
+                for (int i = 0; i < qtdJogadores; i++) {
+                    if (jogadores[i].getNome().equals(nomeAux)) {
+                        System.out.println("Estatisticas do jogador " + jogadores[i].getNome() + " neste jogo");
+                        for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                            if (opcao1 == 1 && jogadores[i].getJogo()[j] instanceof JogoAzar) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
+                            } else if (opcao1 == 2 && jogadores[i].getJogo()[j] instanceof JogoGeneral) {
+                                for (int k = 0; k < 6; k++) {
+                                    Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                    Estatistica[k] += Estatisticaaux;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 6; i++) {
+                    System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
+                }
+
+                break;
+
+            case 3:
+
+                do {
+                    System.out.println("1 - jogo de Azar");
+                    System.out.println("2 - jogo General");
+                    opcao1 = teclado.nextInt();
+
+                } while (opcao1 < 1 || opcao1 > 2);
+
+                for (int i = 0; i < qtdJogadores; i++) {
+
+                    for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                        if (opcao1 == 1 && jogadores[i].getJogo()[j] instanceof JogoAzar) {
+                            for (int k = 0; k < 6; k++) {
+                                Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                Estatistica[k] += Estatisticaaux;
+                            }
+                        } else if (opcao1 == 2 && jogadores[i].getJogo()[j] instanceof JogoGeneral) {
+                            for (int k = 0; k < 6; k++) {
+                                Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                Estatistica[k] += Estatisticaaux;
+                            }
+                        }
+                    }
+
+                }
+
+                for (int i = 0; i < 6; i++) {
+                    System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
+                }
+
+            case 4:
+                
+                for (int i = 0; i < qtdJogadores; i++) {
+
+                    for (int j = 0; j < jogadores[i].getnJogos(); j++) {
+                    
+                            for (int k = 0; k < 6; k++) {
+                                Estatisticaaux = jogadores[i].getJogo()[j].getEstatisticas(k);
+                                Estatistica[k] += Estatisticaaux;
+                            }
+                        
+                    }
+                }
+
+                for (int i = 0; i < 6; i++) {
+                    System.out.println("Numero " + (i + 1) + " numero de vezes que saiu: " + Estatistica[i]);
+                }
+            
+            break;
+
 
             default:
                 break;

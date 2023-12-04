@@ -12,6 +12,9 @@ public abstract class Jogador {
         nJogos = 0;
         saldo = 100;
     }
+    public Jogador() {
+        jogo = new JogoDados[10];  
+    }
 
     abstract void jogarGeneral(int rodada, float valorAposta);
 
@@ -82,5 +85,8 @@ public abstract class Jogador {
         boolean s = jogo[rodada].jogarJogos(tipoJogador);
         if(s) setSaldo(saldo + valorAposta*2);
         System.out.println("Saldo: " + (saldo));
+    }
+    public void zerarNumJogos() {
+        nJogos = 0;
     }
 }

@@ -41,6 +41,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
                     System.out.printf(getDado(j).getSideUp() + " ");
                     salvarEstatisticas(getDado(j).getSideUp());
                 }
+                System.out.println("Rodada " + (i + 1) + ": ");
                 System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
                 for (int k = 0; k < 13; k++) {
                     aux = jogadas[k];
@@ -213,6 +214,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
             if(a == i+1) estats[i]++;
         }
     }
-    public int[] getEstatisticas() {return estats;}
+    @Override
+    public int getEstatisticas(int i) {return estats[i];}
 
 }

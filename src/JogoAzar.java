@@ -52,7 +52,12 @@ public class JogoAzar extends JogoDados {
             if(a == i+1) estats[i]++;
         }
     }
-    public int[] getEstatisticas() {return estats;}
+    @Override
+    public int getEstatisticas(int i) {return estats[i];}
+        
+
+    
+    
         
     
 }
