@@ -30,9 +30,9 @@ public class JogoGeneral extends JogoDados implements Serializable {
             for (int i = 0; i < 13; i++) {
                 int escolha = 0;
                 super.rolarDados();
-                System.out.println("Dados:");
+                System.out.print("Dados: ");
                 for (int j = 0; j < 5; j++) {
-                    System.out.print(super.getDado(j).getSideUp() + " ");
+                    System.out.print(super.getDado(j).getSideUp() + "-");
                 }
                 System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
                 for (int k = 0; k < 13; k++) {
@@ -61,12 +61,14 @@ public class JogoGeneral extends JogoDados implements Serializable {
             for (int i = 0; i < 13; i++) {
 
                 super.rolarDados();
-                System.out.print("Dados:");
+                System.out.print("Dados: ");
                 for (int j = 0; j < 5; j++) {
-                    System.out.println(super.getDado(j).getSideUp() + " ");
+                    System.out.print(super.getDado(j).getSideUp() + "-");
                 }
-
+                
                 jogadas[i] = executarRegrasJogoG(i + 1);
+                System.out.println("\nJogada escolhida: " + (i + 1) + "\n");
+                //System.out.println();
             }
         }
 
