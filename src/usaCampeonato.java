@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class usaCampeonato {
-    public static void main(String[] args){
+    public static void main(String[] args){//metodo main
         Scanner teclado = new Scanner(System.in);
         char opcao;
         Campeonato c = new Campeonato();
-        do {
+        do {//menu interativo para escolher as opcoes
             System.out.println("\n..:: Menu interativo ::..");
             System.out.println("a - Incluir jogador");
             System.out.println("b - Remover jogador");

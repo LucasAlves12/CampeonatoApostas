@@ -7,12 +7,14 @@ public abstract class Jogador implements Serializable {
     private int nJogos;
     private float saldo;
 
+    //construtor
     public Jogador(String nome) {
         this.nome = nome;
         jogo = new JogoDados[10];
         nJogos = 0;
         saldo = 100;
     }
+    //construtor sobrecarga
     public Jogador() {
         jogo = new JogoDados[10];  
     }
@@ -78,6 +80,7 @@ public abstract class Jogador implements Serializable {
         return 0;
     }
 
+    //usado para fazer a aposta da maquina
     public int ApostaMaquina() {
         return 0;
     }
@@ -103,7 +106,5 @@ public abstract class Jogador implements Serializable {
         if(s) setSaldo(saldo + valorAposta*2);
         System.out.println("Saldo: " + (saldo));
     }
-    public void zerarNumJogos() {
-        nJogos = 0;
-    }
+
 }

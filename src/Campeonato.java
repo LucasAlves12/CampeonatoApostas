@@ -10,8 +10,8 @@ public class Campeonato {
     private int qtdJogadores;
     private int maxJogadores;
     private File arq = new File("CampeonatoApostas.dat");
-    private Scanner teclado = new Scanner(System.in);
 
+    // construtor
     public Campeonato() {
         jogadores = new Jogador[10];
         qtdJogadores = 0;
@@ -21,6 +21,7 @@ public class Campeonato {
     // incluir jogador ao campeonato
     public void incluirJogador() {
         char p;
+        Scanner teclado = new Scanner(System.in);
 
         System.out.println("Insira seu nome: ");
         String nome = teclado.nextLine();
@@ -69,6 +70,7 @@ public class Campeonato {
         String nomeAux; // variavel para remover pelo nome
         int aux;
         int i;
+        Scanner teclado = new Scanner(System.in);
 
         System.out.println("----- Jogadores -----");
         for (i = 0; i < qtdJogadores; i++) {
@@ -90,6 +92,8 @@ public class Campeonato {
 
                 System.out.println("Jogador removido!\n");
             }
+            if(i==10)
+                teclado.nextLine();
         }
 
     }
@@ -111,47 +115,48 @@ public class Campeonato {
             if (jogadores[i].getSaldo() <= 0) {
                 System.out
                         .println("O jogador " + jogadores[i].getNome() + " não possui saldo suficiente para jogar");
-                break;
-            }
 
-            if (jogadores[i].getnJogos() == 10) {
-                System.out.println("O jogador " + jogadores[i].getNome() + " já jogou 10 vezes, este é o limite");
-                break;
-            }
-
-            if (jogadores[i] instanceof Humano) {// humano
-
-                System.out.println("Jogador: " + jogadores[i].getNome());
-
-                valorAposta = jogadores[i].escolherAposta();
-                opcao = jogadores[i].escolherJogo();
-
-                if (opcao == 'G') {
-                    jogadores[i].jogarGeneral(jogadores[i].getnJogos(), valorAposta);
+            } else {
+                if (jogadores[i].getnJogos() == 10) {
+                    System.out.println("O jogador " + jogadores[i].getNome() + " já jogou 10 vezes, este é o limite");
+                    break;
                 }
 
-                else if (opcao == 'A') {
-                    jogadores[i].jogarAzar(jogadores[i].getnJogos(), valorAposta);
+                if (jogadores[i] instanceof Humano) {// humano
+
+                    System.out.println("\nJogador: " + jogadores[i].getNome() + " Saldo: " + jogadores[i].getSaldo());
+
+                    valorAposta = jogadores[i].escolherAposta();
+                    opcao = jogadores[i].escolherJogo();
+
+                    if (opcao == 'G') {
+                        jogadores[i].jogarGeneral(jogadores[i].getnJogos(), valorAposta);
+                    }
+
+                    else if (opcao == 'A') {
+                        jogadores[i].jogarAzar(jogadores[i].getnJogos(), valorAposta);
+
+                    }
+
+                } else if (jogadores[i] instanceof Maquina) {// maquina
+
+                    System.out.println("\nJogador: " + jogadores[i].getNome());
+
+                    valorAposta = jogadores[i].escolherAposta();
+                    int opcaoMaquina = jogadores[i].ApostaMaquina();
+
+                    if (opcaoMaquina == 0)
+                        jogadores[i].jogarGeneral(jogadores[i].getnJogos(), valorAposta);
+                    else
+                        jogadores[i].jogarAzar(jogadores[i].getnJogos(), valorAposta);
 
                 }
-
-            } else if (jogadores[i] instanceof Maquina) {// maquina
-
-                System.out.println("Jogador: " + jogadores[i].getNome());
-
-                valorAposta = jogadores[i].escolherAposta();
-                int opcaoMaquina = jogadores[i].ApostaMaquina();
-
-                if (opcaoMaquina == 0)
-                    jogadores[i].jogarGeneral(jogadores[i].getnJogos(), valorAposta);
-                else
-                    jogadores[i].jogarAzar(jogadores[i].getnJogos(), valorAposta);
-
             }
         }
 
     }
 
+    //verifica se existem jogadores maquinas
     private boolean temJogadoresmaquinas() {
 
         for (int i = 0; i < qtdJogadores; i++) {
@@ -162,6 +167,7 @@ public class Campeonato {
         return false;
     }
 
+    //verifica se existem jogadores humanos
     private boolean temJogadoresHumanos() {
 
         for (int i = 0; i < qtdJogadores; i++) {
@@ -174,7 +180,7 @@ public class Campeonato {
 
     // imprime o saldo dos jogadores
     public void imprimirSaldo() {
-
+        Scanner teclado = new Scanner(System.in);
         int opcao;
 
         do {
@@ -228,6 +234,8 @@ public class Campeonato {
     public void extrato() {
         int opcaoJogador;
         int opcaoJogo;
+        Scanner teclado = new Scanner(System.in);
+
 
         do {
             System.out.println("Imprimir extrato somente de humanos (1)");
@@ -243,7 +251,7 @@ public class Campeonato {
             opcaoJogo = teclado.nextInt();
         } while (opcaoJogo < 1 || opcaoJogo > 3);
 
-        if (opcaoJogador == 1 && opcaoJogo == 1){
+        if (opcaoJogador == 1 && opcaoJogo == 1) {
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -252,33 +260,36 @@ public class Campeonato {
                             jogadores[j].getJogo()[i].extrato();
                 }
 
-            if (temJogadoresHumanos() == false) 
-                {System.out.println("Não há jogadores humanos cadastrados");}
-                
+            if (temJogadoresHumanos() == false) {
+                System.out.println("Não há jogadores humanos cadastrados");
             }
-        if (opcaoJogador == 1 && opcaoJogo == 2){
-            for (int j = 0; j < qtdJogadores; j++)
-                if (jogadores[j] instanceof Humano) {
-                    System.out.println("\nNome: " + jogadores[j].getNome());
-                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
-                        if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
-                            jogadores[j].getJogo()[i].extrato();
-                }
-            if (temJogadoresHumanos() == false) 
-                {System.out.println("Não há jogadores humanos cadastrados");}
+
         }
-        if (opcaoJogador == 1 && opcaoJogo == 3){
+        if (opcaoJogador == 1 && opcaoJogo == 2) {
+            for (int j = 0; j < qtdJogadores; j++)
+                if (jogadores[j] instanceof Humano) {
+                    System.out.println("\nNome: " + jogadores[j].getNome());
+                    for (int i = 0; i < jogadores[j].getnJogos(); i++)
+                        if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
+                            jogadores[j].getJogo()[i].extrato();
+                }
+            if (temJogadoresHumanos() == false) {
+                System.out.println("Não há jogadores humanos cadastrados");
+            }
+        }
+        if (opcaoJogador == 1 && opcaoJogo == 3) {
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         jogadores[j].getJogo()[i].extrato();
                 }
-            if (temJogadoresHumanos() == false) 
-                {System.out.println("Não há jogadores humanos cadastrados");}
+            if (temJogadoresHumanos() == false) {
+                System.out.println("Não há jogadores humanos cadastrados");
             }
+        }
 
-        if (opcaoJogador == 2 && opcaoJogo == 1){
+        if (opcaoJogador == 2 && opcaoJogo == 1) {
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -286,11 +297,12 @@ public class Campeonato {
                         if (jogadores[j].getJogo()[i] instanceof JogoAzar)
                             jogadores[j].getJogo()[i].extrato();
                 }
-            if (temJogadoresmaquinas() == false) 
-                {System.out.println("Não há jogadores maquinas cadastrados");}
+            if (temJogadoresmaquinas() == false) {
+                System.out.println("Não há jogadores maquinas cadastrados");
             }
+        }
 
-        if (opcaoJogador == 2 && opcaoJogo == 2){
+        if (opcaoJogador == 2 && opcaoJogo == 2) {
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -298,11 +310,12 @@ public class Campeonato {
                         if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                             jogadores[j].getJogo()[i].extrato();
                 }
-                if (temJogadoresmaquinas() == false) 
-                    {System.out.println("Não há jogadores maquinas cadastrados");}
+            if (temJogadoresmaquinas() == false) {
+                System.out.println("Não há jogadores maquinas cadastrados");
             }
+        }
 
-        if (opcaoJogador == 2 && opcaoJogo == 3){
+        if (opcaoJogador == 2 && opcaoJogo == 3) {
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
                     System.out.println("\nNome: " + jogadores[j].getNome());
@@ -310,11 +323,12 @@ public class Campeonato {
                         jogadores[j].getJogo()[i].extrato();
                 }
 
-            if (temJogadoresmaquinas() == false) 
-                    {System.out.println("Não há jogadores maquinas cadastrados");}
+            if (temJogadoresmaquinas() == false) {
+                System.out.println("Não há jogadores maquinas cadastrados");
             }
+        }
 
-        if (opcaoJogador == 3 && opcaoJogo == 1){
+        if (opcaoJogador == 3 && opcaoJogo == 1) {
             for (int j = 0; j < qtdJogadores; j++) {
                 System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++)
@@ -322,29 +336,29 @@ public class Campeonato {
                         jogadores[j].getJogo()[i].extrato();
             }
 
-            if(qtdJogadores == 0)
+            if (qtdJogadores == 0)
                 System.out.println("Não há jogadores cadastrados");
         }
 
-        if (opcaoJogador == 3 && opcaoJogo == 2){
+        if (opcaoJogador == 3 && opcaoJogo == 2) {
             for (int j = 0; j < qtdJogadores; j++) {
                 System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++)
                     if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                         jogadores[j].getJogo()[i].extrato();
             }
-            if(qtdJogadores == 0)
+            if (qtdJogadores == 0)
                 System.out.println("Não há jogadores cadastrados");
         }
 
-        if (opcaoJogador == 3 && opcaoJogo == 3){
+        if (opcaoJogador == 3 && opcaoJogo == 3) {
             for (int j = 0; j < qtdJogadores; j++) {
                 System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++) {
                     jogadores[j].getJogo()[i].extrato();
                 }
             }
-            if(qtdJogadores == 0)
+            if (qtdJogadores == 0)
                 System.out.println("Não há jogadores cadastrados");
         }
 
@@ -355,6 +369,8 @@ public class Campeonato {
         int opcao1;
         int[] Estatistica = new int[6];
         int Estatisticaaux;
+        Scanner teclado = new Scanner(System.in);
+
 
         for (int i = 0; i < 5; i++) {
             Estatistica[i] = 0;

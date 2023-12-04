@@ -1,9 +1,11 @@
 public class Maquina extends Jogador implements JogarComoMaquina{
 
+    //construtor
     public Maquina(String nome) {
         super(nome);
     }
 
+    //se for 0, joga general, se for 1 joga azar
     public int ApostaMaquina() {
         return (int)Math.floor((Math.random() * 2));
     }

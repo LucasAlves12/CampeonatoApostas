@@ -6,6 +6,7 @@ public class Humano extends Jogador implements JogarComoHumano {
     private String conta;
     private int numeroBanco;
 
+    //construtor
     public Humano(String nome,String cpf, String agencia, String conta, int numeroBanco) {
         super(nome);
         this.cpf = cpf;

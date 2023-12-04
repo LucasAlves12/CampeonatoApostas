@@ -8,6 +8,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
     private boolean resultado;
     private int[] estats;
 
+    //construtor
     public JogoGeneral(float valorAposta, float saldo) {
 
         super(5, "General", saldo);

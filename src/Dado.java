@@ -3,7 +3,9 @@ import java.io.Serializable;
 
 public class Dado implements Serializable{
     private int sideUp;
+    private static final int NUM_SIDES = 6;
     
+    //construtor
     public Dado() {
         sideUp = -1;
     }
@@ -16,7 +18,7 @@ public class Dado implements Serializable{
     //metodo para rolar o dado
     public void roll() {
         Random random = new Random();
-        sideUp = random.nextInt(6) + 1;
+        sideUp = random.nextInt(NUM_SIDES) + 1;
     }
 
     //metodo para mostrar o dado

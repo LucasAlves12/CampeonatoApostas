@@ -4,6 +4,7 @@ public class JogoAzar extends JogoDados {
     private boolean resultado;
     private int[] estats;
 
+    //construtor da classe
     public JogoAzar(float valorAposta, float saldo) {
         super(2, "Jogo do Azar", saldo);
         this.valorAposta = valorAposta;
