@@ -28,6 +28,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
         return jogadas[x];
     }
 
+    // metodo para jogar o jogo general retornado boolean
     public boolean jogarJogos(char tipoJogador) {
         Scanner sc = new Scanner(System.in);
         int aux = 0;
@@ -106,6 +107,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
 
     }
 
+    //pontua a jogada
     public void pontuarJogada(int pos, int pont) {
         jogadas[pos - 1] = pont;
     }
@@ -194,6 +196,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
 
     }
 
+    // metodo para mostrar o extrato do jogo general
     public void extrato() {
         System.out.println("Jogo: Jogo general");
         System.out.println("Valor da aposta: " + valorAposta);
@@ -201,6 +204,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
         else System.out.println("Resultado: Perdeu" );   
     }
 
+    //metodo para printar dados sorteados
     public String toString() {
         String s = "";
         for (int i = 0; i < 5; i++) {
@@ -209,11 +213,14 @@ public class JogoGeneral extends JogoDados implements Serializable {
         return s;
     }
 
+    //metodo para salvar estatisticas por jogada
     public void salvarEstatisticas(int a) {
         for(int i = 0; i < 6; i++){
             if(a == i+1) estats[i]++;
         }
     }
+
+    //metodo para pegar estatisticas por jogada
     @Override
     public int getEstatisticas(int i) {return estats[i];}
 

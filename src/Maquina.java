@@ -4,6 +4,7 @@ public class Maquina extends Jogador implements JogarComoMaquina{
         super(nome);
     }
 
+    //escolhe o valor a ser apostado
     public float escolherAposta() {
         float valorAposta=0;
         if (getSaldo() > 0) {
@@ -15,12 +16,14 @@ public class Maquina extends Jogador implements JogarComoMaquina{
         return valorAposta;
     }
 
+    //metodo para chamar o jogo general e atribuir o valor da aposta
     @Override
     void jogarGeneral(int rodada, float valorAposta) {
         super.setSaldo(super.getSaldo() - valorAposta);
         super.execGeneral(rodada, valorAposta,'M');
     }
 
+    //metodo para chamar o jogo azar e atribuir o valor da aposta
     @Override
     void jogarAzar(int rodada, float valorAposta) {
         super.setSaldo(super.getSaldo() - valorAposta);

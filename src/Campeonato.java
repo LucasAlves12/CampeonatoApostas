@@ -9,7 +9,7 @@ public class Campeonato {
     private Jogador[] jogadores;
     private int qtdJogadores;
     private int maxJogadores;
-    private File arq = new File("jogoGeneral.dat");
+    private File arq = new File("CampeonatoApostas.dat");
     private Scanner teclado = new Scanner(System.in);
 
     public Campeonato() {
@@ -18,7 +18,7 @@ public class Campeonato {
         maxJogadores = 10;
     }
 
-    // inclui jogador no vetor de jogadores, nçao pode haver jogadores com o mesmo nome
+    // incluir jogador ao campeonato
     public void incluirJogador() {
         char p;
 
@@ -63,7 +63,7 @@ public class Campeonato {
         }
     }
 
-    //remove jogador pelo nome
+    // remover jogador do campeonato
     public void removerJogador() {
         int posicaoRemovida = 0;
         String nomeAux; // variavel para remover pelo nome
@@ -94,6 +94,7 @@ public class Campeonato {
 
     }
 
+    // inicia o campeonato
     public void iniciarCampeonato() {
         Float valorAposta;
         char opcao = ' ';
@@ -119,7 +120,7 @@ public class Campeonato {
                     break;
                 }
 
-                if (jogadores[i] instanceof Humano) {
+                if (jogadores[i] instanceof Humano) {// humano
 
                     System.out.println("Jogador: " + jogadores[i].getNome());
 
@@ -135,7 +136,7 @@ public class Campeonato {
 
                     }
 
-                } else if (jogadores[i] instanceof Maquina) {
+                } else if (jogadores[i] instanceof Maquina) {// maquina
 
                     System.out.println("Jogador: " + jogadores[i].getNome());
 
@@ -153,7 +154,7 @@ public class Campeonato {
 
     }
 
-    //imprime o saldo de todos os jogadores ou somente de humanos ou somente de maquinas
+    // imprime o saldo dos jogadores
     public void imprimirSaldo() {
 
         int opcao;
@@ -193,8 +194,8 @@ public class Campeonato {
 
     }
 
-    //imprime o extrato de todos os jogadores
-    public void extrato() {// Analisar este código
+    // imprime o extrato dos resultados
+    public void extrato() {
         int opcaoJogador;
         int opcaoJogo;
 
@@ -215,7 +216,7 @@ public class Campeonato {
         if (opcaoJogador == 1 && opcaoJogo == 1)
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
-                    System.out.println("Nome: " + jogadores[j].getNome());
+                    System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         if (jogadores[j].getJogo()[i] instanceof JogoAzar)
                             jogadores[j].getJogo()[i].extrato();
@@ -223,7 +224,7 @@ public class Campeonato {
         if (opcaoJogador == 1 && opcaoJogo == 2)
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
-                    System.out.println("Nome: " + jogadores[j].getNome());
+                    System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                             jogadores[j].getJogo()[i].extrato();
@@ -231,7 +232,7 @@ public class Campeonato {
         if (opcaoJogador == 1 && opcaoJogo == 3)
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Humano) {
-                    System.out.println("Nome: " + jogadores[j].getNome());
+                    System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         jogadores[j].getJogo()[i].extrato();
                 }
@@ -239,7 +240,7 @@ public class Campeonato {
         if (opcaoJogador == 2 && opcaoJogo == 1)
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
-                    System.out.println("Nome: " + jogadores[j].getNome());
+                    System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         if (jogadores[j].getJogo()[i] instanceof JogoAzar)
                             jogadores[j].getJogo()[i].extrato();
@@ -248,7 +249,7 @@ public class Campeonato {
         if (opcaoJogador == 2 && opcaoJogo == 2)
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
-                    System.out.println("Nome: " + jogadores[j].getNome());
+                    System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                             jogadores[j].getJogo()[i].extrato();
@@ -257,14 +258,14 @@ public class Campeonato {
         if (opcaoJogador == 2 && opcaoJogo == 3)
             for (int j = 0; j < qtdJogadores; j++)
                 if (jogadores[j] instanceof Maquina) {
-                    System.out.println("Nome: " + jogadores[j].getNome());
+                    System.out.println("\nNome: " + jogadores[j].getNome());
                     for (int i = 0; i < jogadores[j].getnJogos(); i++)
                         jogadores[j].getJogo()[i].extrato();
                 }
 
         if (opcaoJogador == 3 && opcaoJogo == 1)
             for (int j = 0; j < qtdJogadores; j++) {
-                System.out.println("Nome: " + jogadores[j].getNome());
+                System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++)
                     if (jogadores[j].getJogo()[i] instanceof JogoAzar)
                         jogadores[j].getJogo()[i].extrato();
@@ -272,7 +273,7 @@ public class Campeonato {
 
         if (opcaoJogador == 3 && opcaoJogo == 2)
             for (int j = 0; j < qtdJogadores; j++) {
-                System.out.println("Nome: " + jogadores[j].getNome());
+                System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++)
                     if (jogadores[j].getJogo()[i] instanceof JogoGeneral)
                         jogadores[j].getJogo()[i].extrato();
@@ -280,7 +281,7 @@ public class Campeonato {
 
         if (opcaoJogador == 3 && opcaoJogo == 3)
             for (int j = 0; j < qtdJogadores; j++) {
-                System.out.println("Nome: " + jogadores[j].getNome());
+                System.out.println("\nNome: " + jogadores[j].getNome());
                 for (int i = 0; i < jogadores[j].getnJogos(); i++) {
                     jogadores[j].getJogo()[i].extrato();
                 }
@@ -288,7 +289,7 @@ public class Campeonato {
 
     }
 
-    //imprime as estatisticas de todos os jogadores ou somente de humanos ou somente de maquinas
+    // imprime as estatisticas sobre os dados
     public void estatisticas() {
         int opcao1;
         int[] Estatistica = new int[6];
