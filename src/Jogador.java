@@ -67,14 +67,17 @@ public abstract class Jogador {
     }
 
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
+        
         jogo[rodada] = new JogoGeneral(valorAposta,saldo);
-        saldo = jogo[rodada].jogarJogos(tipoJogador);
+        boolean s = jogo[rodada].jogarJogos(tipoJogador);
+        if(s) setSaldo(saldo + valorAposta*2);
         System.out.println("Saldo: " + (saldo));
     }
 
     public void execAzar(int rodada, float valorAposta, char tipoJogador){
         jogo[rodada] = new JogoAzar(valorAposta,saldo);
-        saldo = jogo[rodada].jogarJogos(tipoJogador);
+        boolean s = jogo[rodada].jogarJogos(tipoJogador);
+        if(s) setSaldo(saldo + valorAposta*2);
         System.out.println("Saldo: " + (saldo));
     }
 }

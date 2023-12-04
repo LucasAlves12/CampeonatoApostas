@@ -143,7 +143,7 @@ public class Campeonato {
         System.out.printf("%s", "\t");
 
         for (i = 0; i < qtdJogadores; i++)
-            System.out.printf("%s", "\t" + jogadores[i].getNome() + "(" + jogadores[i].getTipoJogador() + ")\t");
+                        System.out.printf("%s", "\t" + jogadores[i].getNome() + "(" + jogadores[i].getTipoJogador() + ")\t");
         System.out.println();
     }
 
@@ -152,9 +152,9 @@ public class Campeonato {
         System.out.println("----- Extrato de Jogos -----\n");
         System.out.printf("%s", "\t");
 
-        for (i = 0; i < qtdJogadores; i++)
+         for (i = 0; i < qtdJogadores; i++)
             System.out.printf("%s", "\t" + jogadores[i].getNome() + "(" + jogadores[i].getTipoJogador() + ")\t");
-        System.out.println();
+                    System.out.println();
     }
 
     public void estatisticas() { // Analisar este código
@@ -165,7 +165,7 @@ public class Campeonato {
         for (i = 0; i < qtdJogadores; i++)
             System.out.printf("%s", "\t" + jogadores[i].getNome() + "(" + jogadores[i].getTipoJogador() + ")\t");
         System.out.println();
-    }
+    } 
 
     // grava em arquivo .dat a rodada executada
     public void gravarEmArquivo() {

@@ -33,17 +33,15 @@ public class usaCampeonato {
                     break;
 
                 case 'd':
-                    c.mostrarCartela();
+                    c.imprimirSaldo();
                     break;
 
                 case 'e':
                     c.extrato();    
-
                     break;
 
                 case 'f':
                     c.estatisticas();
-                    
                     break;
                 case 'g':
                     c.gravarEmArquivo();

@@ -64,9 +64,10 @@ public abstract class JogoDados implements Estatistica {
         return soma;
     }
 
-    public abstract float jogarJogos(char tipoJog);
+    public abstract boolean jogarJogos(char tipoJog);
+    public abstract void extrato();
     
-    public boolean validarJogada(int jogada) {
-        return false;
-    }
+   
+        
+    
 }

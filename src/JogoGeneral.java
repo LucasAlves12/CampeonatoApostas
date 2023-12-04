@@ -5,8 +5,9 @@ public class JogoGeneral extends JogoDados implements Serializable {
 
     private int[] jogadas;
     private float valorAposta;
+    private boolean resultado;
 
-    public JogoGeneral(float valorAposta,float saldo) {
+    public JogoGeneral(float valorAposta, float saldo) {
 
         super(5, "General", saldo);
         this.valorAposta = valorAposta;
@@ -22,10 +23,9 @@ public class JogoGeneral extends JogoDados implements Serializable {
         return jogadas[x];
     }
 
-  
-    public float jogarJogos (char tipoJogador) {
+    public boolean jogarJogos(char tipoJogador) {
         Scanner sc = new Scanner(System.in);
-        int aux=0;
+        int aux = 0;
         if (tipoJogador == 'H' || tipoJogador == 'h') {
             for (int i = 0; i < 13; i++) {
                 int escolha = 0;
@@ -42,63 +42,48 @@ public class JogoGeneral extends JogoDados implements Serializable {
                     else
                         System.out.print(aux + "\t");
                 }
-                do{
+                do {
                     System.out.println("\nEscolha uma jogada (1-13): ");
                     escolha = sc.nextInt();
-                }while(escolha < 1 || escolha > 13 || jogadas[escolha-1] != -1);
+                } while (escolha < 1 || escolha > 13 || jogadas[escolha - 1] != -1);
 
-                if(jogadas[escolha-1] == -1){
+                if (jogadas[escolha - 1] == -1) {
                     pontuarJogada(escolha, executarRegrasJogoG(escolha));
-                }
-                else{
-                    while(jogadas[escolha-1] != -1 && (escolha < 1 || escolha >13)){
+                } else {
+                    while (jogadas[escolha - 1] != -1 && (escolha < 1 || escolha > 13)) {
                         System.out.println("Jogada já realizada, escolha outra: ");
                         escolha = sc.nextInt();
                     }
                     pontuarJogada(escolha, executarRegrasJogoG(escolha));
                 }
             }
-            int total = 0;
-            for (int i = 0; i < 12; i++) {
-                total += jogadas[i];
-            }
-            float saldo = getSaldo();
-            if(total > (jogadas[12]*2)){
-                saldo += valorAposta;
-                System.out.println("Você ganhou!!! Seu novo saldo : " + saldo);
-                return (valorAposta*2);//ganhou
-            }
-            else{
-                System.out.println("Você perdeu!!! Seu novo saldo : " + saldo);
-                return getSaldo();//perdeu
-            }
-        }       
-        else{//maquina
+        } else {// maquina
             for (int i = 0; i < 13; i++) {
-                
+
                 super.rolarDados();
                 System.out.print("Dados:");
                 for (int j = 0; j < 5; j++) {
                     System.out.println(super.getDado(j).getSideUp() + " ");
                 }
 
-                jogadas[i] = executarRegrasJogoG(i+1);
+                jogadas[i] = executarRegrasJogoG(i + 1);
             }
-            int total = 0;
-            for (int i = 0; i < 12; i++) {
-                total += jogadas[i];
-            }
-            if(total > (jogadas[12]*2)){
-                super.setSaldo(super.getSaldo() + valorAposta*2);
-                System.out.println("Você ganhou!!! ");
-                return getSaldo();
-            }
-            else{
-                System.out.println("Você perdeu!!! ");
-                return getSaldo();
-            }  
         }
-        
+
+
+        int total = 0;
+        for (int i = 0; i < 12; i++) {
+            total += jogadas[i];
+        }
+        if (total > (jogadas[12] * 2)) {
+            super.setSaldo(super.getSaldo() + valorAposta * 2);
+            System.out.println("Você ganhou!!! ");resultado = true;
+            return true;
+        } else {
+            System.out.println("Você perdeu!!! ");resultado = false;
+            return false;
+        }
+
     }
 
     public void pontuarJogada(int pos, int pont) {
@@ -181,16 +166,18 @@ public class JogoGeneral extends JogoDados implements Serializable {
 
                 return 0;
 
-            case 13:    return soma;// jogada aleatória
-                
+            case 13:
+                return soma;// jogada aleatória
 
         }
         return 0;
 
     }
 
-    
-
+    public void extrato() {
+        System.out.println("Valor da aposta: " + valorAposta);
+        System.out.println("Resultado: " + resultado);
+    }
 
     public String toString() {
         String s = "";
