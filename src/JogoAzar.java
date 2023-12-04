@@ -13,6 +13,7 @@ public class JogoAzar extends JogoDados {
         }
     }
 
+    //metodo para jogar o jogo azar retornado boolean
     @Override
     public boolean jogarJogos(char tipoJog) {
         int lancamento = 1;
@@ -40,6 +41,8 @@ public class JogoAzar extends JogoDados {
         } while (true);
 
     }
+
+    //metodo para mostrar o extrato do jogo azar
     public void extrato(){
         System.out.println("Jogo: Jogo azar");
         System.out.println("Valor da aposta: " + valorAposta);
@@ -47,11 +50,14 @@ public class JogoAzar extends JogoDados {
         else System.out.println("Resultado: Perdeu" ); 
     }
 
+    //metodo para salvar estatisticas por jogada
     public void salvarEstatisticas(int a) {
         for(int i = 0; i < 6; i++){
             if(a == i+1) estats[i]++;
         }
     }
+
+    //metodo para pegar estatisticas por jogada
     @Override
     public int getEstatisticas(int i) {return estats[i];}
         

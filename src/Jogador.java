@@ -17,30 +17,36 @@ public abstract class Jogador implements Serializable {
         jogo = new JogoDados[10];  
     }
 
+    //metodos abstratos
     abstract void jogarGeneral(int rodada, float valorAposta);
-
     abstract void jogarAzar(int rodada, float valorAposta);
+    public abstract float escolherAposta();
 
+    //metodo para settar saldo do jogador
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 
+    //metodo para pegar o numero de jogos
     public int getnJogos() {
         return nJogos;
     }
 
+    //metodo para jogar os dados
     public void jogarDados() {
         for (int i = 0; i < nJogos; i++) {
             jogo[i].rolarDados();
         }
     }
 
+    //metodo para mostrar as jogadas executadas
     public void mostrarJogadasExecutadas() {
         for (int i = 0; i < nJogos; i++) {
             System.out.println(jogo[i].toString());
         }
     }
 
+    //metodo para mostrar o tipo de jogador
     public String getTipoJogador() {
         String tipo;
 
@@ -52,24 +58,27 @@ public abstract class Jogador implements Serializable {
         return tipo;
     }
 
+    //metodo para pegar o jogo
     public JogoDados[] getJogo() {
         return jogo;
     }
 
+    //metodo para pegar o nome do jogador
     public String getNome() {
         return this.nome;
     }
 
+    //metodo para pegar o saldo do jogador
     public Float getSaldo() {
         return saldo;
     }
     
-    public abstract float escolherAposta();
-
+    //metodo para escolher o jogo
     public char escolherJogo() {
         return 0;
     }
 
+    //metodo que executa o jogo general e atualiza o saldo conforme o resultado
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
 
         nJogos++;
@@ -80,6 +89,7 @@ public abstract class Jogador implements Serializable {
         System.out.println("Saldo: " + (saldo));
     }
 
+    //metodo que executa o jogo azar e atualiza o saldo conforme o resultado
     public void execAzar(int rodada, float valorAposta, char tipoJogador){
         nJogos++;
         jogo[rodada] = new JogoAzar(valorAposta,saldo);

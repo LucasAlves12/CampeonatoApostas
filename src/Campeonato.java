@@ -18,6 +18,7 @@ public class Campeonato {
         maxJogadores = 10;
     }
 
+    // incluir jogador ao campeonato
     public void incluirJogador() {
         char p;
 
@@ -62,6 +63,7 @@ public class Campeonato {
         }
     }
 
+    // remover jogador do campeonato
     public void removerJogador() {
         int posicaoRemovida = 0;
         String nomeAux; // variavel para remover pelo nome
@@ -92,6 +94,7 @@ public class Campeonato {
 
     }
 
+    // inicia o campeonato
     public void iniciarCampeonato() {
         Float valorAposta;
         char opcao = ' ';
@@ -117,7 +120,7 @@ public class Campeonato {
                     break;
                 }
 
-                if (jogadores[i] instanceof Humano) {
+                if (jogadores[i] instanceof Humano) {// humano
 
                     System.out.println("Jogador: " + jogadores[i].getNome());
 
@@ -133,7 +136,7 @@ public class Campeonato {
 
                     }
 
-                } else if (jogadores[i] instanceof Maquina) {
+                } else if (jogadores[i] instanceof Maquina) {// maquina
 
                     System.out.println("Jogador: " + jogadores[i].getNome());
 
@@ -151,6 +154,7 @@ public class Campeonato {
 
     }
 
+    // imprime o saldo dos jogadores
     public void imprimirSaldo() {
 
         int opcao;
@@ -190,7 +194,8 @@ public class Campeonato {
 
     }
 
-    public void extrato() {// Analisar este código
+    // imprime o extrato dos resultados
+    public void extrato() {
         int opcaoJogador;
         int opcaoJogo;
 
@@ -284,6 +289,7 @@ public class Campeonato {
 
     }
 
+    // imprime as estatisticas sobre os dados
     public void estatisticas() {
         int opcao1;
         int[] Estatistica = new int[6];
