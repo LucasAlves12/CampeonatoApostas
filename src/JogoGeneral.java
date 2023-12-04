@@ -175,6 +175,7 @@ public class JogoGeneral extends JogoDados implements Serializable {
     }
 
     public void extrato() {
+        System.out.println("Jogo: Jogo general");
         System.out.println("Valor da aposta: " + valorAposta);
         System.out.println("Resultado: " + resultado);
     }

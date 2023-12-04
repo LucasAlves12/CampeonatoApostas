@@ -33,6 +33,7 @@ public class JogoAzar extends JogoDados {
 
     }
     public void extrato(){
+        System.out.println("Jogo: Jogo azar");
         System.out.println("Valor da aposta: " + valorAposta);
         System.out.println("Resultado: " + resultado);
     }
