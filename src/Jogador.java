@@ -67,7 +67,7 @@ public abstract class Jogador {
     }
 
     public void execGeneral(int rodada, float valorAposta, char tipoJogador){
-        
+        nJogos++;
         jogo[rodada] = new JogoGeneral(valorAposta,saldo);
         boolean s = jogo[rodada].jogarJogos(tipoJogador);
         if(s) setSaldo(saldo + valorAposta*2);
@@ -75,6 +75,7 @@ public abstract class Jogador {
     }
 
     public void execAzar(int rodada, float valorAposta, char tipoJogador){
+        nJogos++;
         jogo[rodada] = new JogoAzar(valorAposta,saldo);
         boolean s = jogo[rodada].jogarJogos(tipoJogador);
         if(s) setSaldo(saldo + valorAposta*2);

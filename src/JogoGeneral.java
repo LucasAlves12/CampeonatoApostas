@@ -28,11 +28,12 @@ public class JogoGeneral extends JogoDados implements Serializable {
         int aux = 0;
         if (tipoJogador == 'H' || tipoJogador == 'h') {
             for (int i = 0; i < 13; i++) {
+                System.out.println("Rodada " + (i + 1) + ": ");
                 int escolha = 0;
-                super.rolarDados();
+                rolarDados();
                 System.out.println("Dados:");
                 for (int j = 0; j < 5; j++) {
-                    System.out.print(super.getDado(j).getSideUp() + " ");
+                    System.out.printf(getDado(j).getSideUp() + " ");
                 }
                 System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
                 for (int k = 0; k < 13; k++) {
@@ -60,11 +61,22 @@ public class JogoGeneral extends JogoDados implements Serializable {
         } else {// maquina
             for (int i = 0; i < 13; i++) {
 
-                super.rolarDados();
+                rolarDados();
                 System.out.print("Dados:");
                 for (int j = 0; j < 5; j++) {
-                    System.out.println(super.getDado(j).getSideUp() + " ");
+                    System.out.print(getDado(j).getSideUp() + " ");
                 }
+
+                System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");
+                for (int k = 0; k < 13; k++) {
+                    aux = jogadas[k];
+                    if (aux == -1)
+                        System.out.print("- \t");
+                    else
+                        System.out.print(aux + "\t");
+                }
+                System.out.println("escolha maquina: "+ (i+1));
+
 
                 jogadas[i] = executarRegrasJogoG(i + 1);
             }
