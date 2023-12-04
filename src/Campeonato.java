@@ -18,6 +18,7 @@ public class Campeonato {
         maxJogadores = 10;
     }
 
+    // inclui jogador no vetor de jogadores, nçao pode haver jogadores com o mesmo nome
     public void incluirJogador() {
         char p;
 
@@ -62,6 +63,7 @@ public class Campeonato {
         }
     }
 
+    //remove jogador pelo nome
     public void removerJogador() {
         int posicaoRemovida = 0;
         String nomeAux; // variavel para remover pelo nome
@@ -151,6 +153,7 @@ public class Campeonato {
 
     }
 
+    //imprime o saldo de todos os jogadores ou somente de humanos ou somente de maquinas
     public void imprimirSaldo() {
 
         int opcao;
@@ -190,6 +193,7 @@ public class Campeonato {
 
     }
 
+    //imprime o extrato de todos os jogadores
     public void extrato() {// Analisar este código
         int opcaoJogador;
         int opcaoJogo;
@@ -284,6 +288,7 @@ public class Campeonato {
 
     }
 
+    //imprime as estatisticas de todos os jogadores ou somente de humanos ou somente de maquinas
     public void estatisticas() {
         int opcao1;
         int[] Estatistica = new int[6];

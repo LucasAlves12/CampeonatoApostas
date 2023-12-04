@@ -27,10 +27,9 @@ public abstract class JogoDados implements Estatistica,Serializable{
         return dados;
     }
 
-    public Dado getDado(int i) {
-        return dados[i];
-    }
-
+    public Dado getDado(int i) {return dados[i];}
+        
+    
 
     public int numeroDado(Dado dado) {
         return dado.getSideUp();
